@@ -293,7 +293,7 @@
 						<div class="pcoded-inner-navbar main-menu">
 							<div class="">
 								<div class="main-menu-header">
-									<a href="mypage.mem"> <!-- class="img-80 img-radius" -->
+									<a href="myprofile.pro"> <!-- class="img-80 img-radius" -->
 									<c:if test="${ login.profile eq null }">
 											<img id="sideProfile"
 												src="<%= request.getContextPath() %>/resources/assets/images/members/profile.png"
@@ -460,7 +460,15 @@
 							</ul>
 						</div>
 					</nav>
-<!-- ### 1 끝 ### -->				
+<!-- ### 1 끝 ### -->
+
+
+
+
+
+
+
+				
 <!-- ### 2 메인 ### -->
 					<div class="pcoded-content">
 <!-- ### 2-1 메인 해더 ### -->
@@ -473,21 +481,27 @@
 											<h5 class="m-b-10">
 												<!-- class="img-80 img-radius" -->
 												<a href="updateImage.my?img=profile">
-													<c:if test="${ login.profile eq null }">
+													<c:if test="${ member.profile eq null }">
 														<img id="mypageProfile"
 														src="<%= request.getContextPath() %>/resources/assets/images/members/profile.png"
 														alt="User-Profile-Image">
 													</c:if>
-													<c:if test="${ login.profile ne null }"> 
+													<c:if test="${ member.profile ne null }"> 
 														<img id="mypageProfile"
-														src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
+														src="<%= request.getContextPath() %>/resources/assets/images/members/${ member.profile }"
 														alt="User-Profile-Image">
 													</c:if>
 												</a>
 											</h5>
-											<p id="mypageName" class="m-b-0">${ login.name }</p>
-											<p id="bgImgBtn"><input type="button" value="배경 사진 추가" 
-											onclick="javascript:location.href='updateImage.my?img=background'"></p>
+											<p id="mypageName" class="m-b-0">${ member.name }</p>
+											<c:if test="${ fn:contains(myfriend, member.no) }">
+												<p id="bgImgBtn"><input type="button" value="친구 취소" 
+													onclick="javascript:location.href='cancel.fr?no=${ member.no }'"></p>
+											</c:if>
+											<c:if test="${ fn:contains(myfriend, member.no) eq false }">
+												<p id="bgImgBtn"><input type="button" value="친구 신청" 
+													onclick="javascript:location.href='request.fr?no=${ member.no }'"></p>
+											</c:if>
 										</div>
 									</div>
 									<!-- <div class="col-md-4">
@@ -633,74 +647,25 @@
 									<div class="table-responsive">
 										<table class="table table-hover m-b-0 without-header">
 											<tbody>
-												<tr>
-													<td>
-														<div class="d-inline-block align-middle">
-															<img src="assets/images/avatar-4.jpg" alt="user image"
-																class="img-radius img-40 align-top m-r-15">
-															<div class="d-inline-block">
-																<h6>Shirley Hoe</h6>
-																<p class="text-muted m-b-0">Sales executive , NY</p>
+												<c:forEach var="friend" items="${ friendsList }">
+													<tr>
+														<td>
+															<div class="d-inline-block align-middle">
+																<img src="assets/images/avatar-4.jpg" alt="user image"
+																	class="img-radius img-40 align-top m-r-15">
+																<div class="d-inline-block">
+																	<h6>${ friend.name }</h6>
+																	<p class="text-muted m-b-0">Sales executive , NY</p>
+																</div>
 															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<h6 class="f-w-700">
-															$78.001<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
-														</h6>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="d-inline-block align-middle">
-															<img src="assets/images/avatar-2.jpg" alt="user image"
-																class="img-radius img-40 align-top m-r-15">
-															<div class="d-inline-block">
-																<h6>James Alexander</h6>
-																<p class="text-muted m-b-0">Sales executive , EL</p>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<h6 class="f-w-700">
-															$89.051<i class="fas fa-level-up-alt text-c-green m-l-10"></i>
-														</h6>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="d-inline-block align-middle">
-															<img src="assets/images/avatar-4.jpg" alt="user image"
-																class="img-radius img-40 align-top m-r-15">
-															<div class="d-inline-block">
-																<h6>Shirley Hoe</h6>
-																<p class="text-muted m-b-0">Sales executive , NY</p>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<h6 class="f-w-700">
-															$89.051<i class="fas fa-level-up-alt text-c-green m-l-10"></i>
-														</h6>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="d-inline-block align-middle">
-															<img src="assets/images/avatar-2.jpg" alt="user image"
-																class="img-radius img-40 align-top m-r-15">
-															<div class="d-inline-block">
-																<h6>Nick Xander</h6>
-																<p class="text-muted m-b-0">Sales executive , EL</p>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<h6 class="f-w-700">
-															$89.051<i class="fas fa-level-up-alt text-c-green m-l-10"></i>
-														</h6>
-													</td>
-												</tr>
+														</td>
+														<td class="text-right">
+															<h6 class="f-w-700">
+																$78.001<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
+															</h6>
+														</td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 

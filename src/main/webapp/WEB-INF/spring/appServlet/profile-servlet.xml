@@ -12,13 +12,14 @@
 	
 	<!-- ViewResolver -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/userpage"/>
+		<property name="prefix" value="/WEB-INF/profile"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	
 	<!-- Controller 위치 설정 -->
-	<context:component-scan base-package="userpage"></context:component-scan>
+	<context:component-scan base-package="profile"></context:component-scan>
 	<context:component-scan base-package="member"></context:component-scan>
+	<context:component-scan base-package="friend"></context:component-scan>
 	
 	<!-- 파일 업로드를 위한 multipartRequest -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

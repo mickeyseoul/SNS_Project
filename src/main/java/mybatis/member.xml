@@ -29,7 +29,7 @@
 		select * from members where email=#{email} and password=#{password}
 	</select>
 	
-	<!-- 마이페이지 -->
+	<!-- 마이프로필 -->
 	<update id="UpdateBackground">
 		update members set background=#{background} where no=#{no}
 	</update>

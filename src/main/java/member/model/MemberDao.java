@@ -45,7 +45,7 @@ public class MemberDao {
 		return login;
 	}
 
-	//마이페이지
+	//마이프로필
 	public void updateBackground(MemberBean member) {
 		sqlSessionTemplate.update(namespace+".UpdateBackground", member);
 		

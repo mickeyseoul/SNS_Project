@@ -7,12 +7,14 @@
 	<!-- 별칭설정 --> <!-- alias : 가명 -->
 		<typeAliases>
 		<typeAlias type="member.model.MemberBean" alias="MyMember"/>
+		<typeAlias type="friend.model.FriendBean" alias="MyFriend"/>
 	</typeAliases>
 
 	
 	<!-- DB sql문 처리하는 곳 -->
 	<mappers>
 		<mapper resource="mybatis/member.xml"/>
+		<mapper resource="mybatis/friend.xml"/>
 	</mappers>
 
 </configuration>

@@ -260,7 +260,7 @@
 									class="ti-angle-down"></i>
 							</a>
 								<ul class="show-notification profile-notification">
-									<li class="waves-effect waves-light"><a href="settings.my"> <i
+									<li class="waves-effect waves-light"><a href="settings.pro"> <i
 											class="ti-settings"></i> 설정 및 개인정보
 									</a></li>
 									<!-- <li class="waves-effect waves-light"><a
@@ -293,7 +293,7 @@
 						<div class="pcoded-inner-navbar main-menu">
 							<div class="">
 								<div class="main-menu-header">
-									<a href="mypage.mem"> <!-- class="img-80 img-radius" -->
+									<a href="myprofile.pro"> <!-- class="img-80 img-radius" -->
 									<c:if test="${ login.profile eq null }">
 											<img id="sideProfile"
 												src="<%= request.getContextPath() %>/resources/assets/images/members/profile.png"
@@ -472,7 +472,7 @@
 										<div class="page-header-title">
 											<h5 class="m-b-10">
 												<!-- class="img-80 img-radius" -->
-												<a href="updateImage.my?img=profile">
+												<a href="updateImage.pro?img=profile">
 													<c:if test="${ login.profile eq null }">
 														<img id="mypageProfile"
 														src="<%= request.getContextPath() %>/resources/assets/images/members/profile.png"
@@ -487,7 +487,7 @@
 											</h5>
 											<p id="mypageName" class="m-b-0">${ login.name }</p>
 											<p id="bgImgBtn"><input type="button" value="배경 사진 추가" 
-											onclick="javascript:location.href='updateImage.my?img=background'"></p>
+											onclick="javascript:location.href='updateImage.pro?img=background'"></p>
 										</div>
 									</div>
 									<!-- <div class="col-md-4">
@@ -587,7 +587,7 @@
 								</div>
 								<div class="card-block">
 									<p>소개글 작성하기</p>
-									<a href="<%=request.getContextPath()%>/userpage.us">유저페이지</a>
+									<a href="profile.pro?no=6">### 6번 회원 프로필 ###</a>
 								</div>
 							</div>
 						</div>
@@ -614,7 +614,8 @@
 						</div>
 
 
-						<!-- 친구 -->
+<!-- 친구 -->
+
 						<!--  sale analytics start -->
 						<div id="friendList" class="col-xl-6 col-md-12">
 							<div class="card table-card">
@@ -634,74 +635,25 @@
 									<div class="table-responsive">
 										<table class="table table-hover m-b-0 without-header">
 											<tbody>
-												<tr>
-													<td>
-														<div class="d-inline-block align-middle">
-															<img src="assets/images/avatar-4.jpg" alt="user image"
-																class="img-radius img-40 align-top m-r-15">
-															<div class="d-inline-block">
-																<h6>Shirley Hoe</h6>
-																<p class="text-muted m-b-0">Sales executive , NY</p>
+												<c:forEach var="friend" items="${ friendsList }">
+													<tr>
+														<td>
+															<div class="d-inline-block align-middle">
+																<img src="assets/images/avatar-4.jpg" alt="user image"
+																	class="img-radius img-40 align-top m-r-15">
+																<div class="d-inline-block">
+																	<h6>${ friend.name }</h6>
+																	<p class="text-muted m-b-0">Sales executive , NY</p>
+																</div>
 															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<h6 class="f-w-700">
-															$78.001<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
-														</h6>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="d-inline-block align-middle">
-															<img src="assets/images/avatar-2.jpg" alt="user image"
-																class="img-radius img-40 align-top m-r-15">
-															<div class="d-inline-block">
-																<h6>James Alexander</h6>
-																<p class="text-muted m-b-0">Sales executive , EL</p>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<h6 class="f-w-700">
-															$89.051<i class="fas fa-level-up-alt text-c-green m-l-10"></i>
-														</h6>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="d-inline-block align-middle">
-															<img src="assets/images/avatar-4.jpg" alt="user image"
-																class="img-radius img-40 align-top m-r-15">
-															<div class="d-inline-block">
-																<h6>Shirley Hoe</h6>
-																<p class="text-muted m-b-0">Sales executive , NY</p>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<h6 class="f-w-700">
-															$89.051<i class="fas fa-level-up-alt text-c-green m-l-10"></i>
-														</h6>
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<div class="d-inline-block align-middle">
-															<img src="assets/images/avatar-2.jpg" alt="user image"
-																class="img-radius img-40 align-top m-r-15">
-															<div class="d-inline-block">
-																<h6>Nick Xander</h6>
-																<p class="text-muted m-b-0">Sales executive , EL</p>
-															</div>
-														</div>
-													</td>
-													<td class="text-right">
-														<h6 class="f-w-700">
-															$89.051<i class="fas fa-level-up-alt text-c-green m-l-10"></i>
-														</h6>
-													</td>
-												</tr>
+														</td>
+														<td class="text-right">
+															<h6 class="f-w-700">
+																$78.001<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
+															</h6>
+														</td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 
@@ -899,7 +851,7 @@
 		src="<%=request.getContextPath()%>/resources/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<!-- Custom js -->
 	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/resources/assets/js/script.min.js"></script>
+		src="<%=request.getContextPath()%>/resources/assets/js/script.js"></script>
 </body>
 
 </html>

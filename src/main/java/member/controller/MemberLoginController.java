@@ -20,7 +20,7 @@ public class MemberLoginController {
 	
 	private final String command = "/login.mem";
 	private String getPage = "/login";
-	private String gotoPage = "redirect:/mypage.my";
+	private String gotoPage = "redirect:/myprofile.pro";
 	
 	@Autowired
 	private MemberDao memberDao;

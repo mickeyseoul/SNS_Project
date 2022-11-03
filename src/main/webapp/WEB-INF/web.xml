@@ -68,33 +68,35 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>mypage</servlet-name>
+		<servlet-name>profile</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/mypage-servlet.xml</param-value>
+			<param-value>/WEB-INF/spring/appServlet/profile-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
 	<servlet-mapping>
-		<servlet-name>mypage</servlet-name>
-		<url-pattern>*.my</url-pattern>
+		<servlet-name>profile</servlet-name>
+		<url-pattern>*.pro</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>userpage</servlet-name>
+		<servlet-name>friend</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/spring/appServlet/user-servlet.xml</param-value>
+			<param-value>/WEB-INF/spring/appServlet/friend-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 		
 	<servlet-mapping>
-		<servlet-name>userpage</servlet-name>
-		<url-pattern>*.us</url-pattern>
+		<servlet-name>friend</servlet-name>
+		<url-pattern>*.fr</url-pattern>
 	</servlet-mapping>
+
+	
 
 </web-app>

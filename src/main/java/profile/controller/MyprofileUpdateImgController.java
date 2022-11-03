@@ -1,4 +1,4 @@
-package mypage.controller;
+package profile.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,10 +16,10 @@ import member.model.MemberBean;
 import member.model.MemberDao;
 
 @Controller
-public class MypageUpdateImgController {
+public class MyprofileUpdateImgController {
 	
-	private final String command = "/updateImage.my";
-	private String gotoPage = "redirect:/mypage.my";
+	private final String command = "/updateImage.pro";
+	private String gotoPage = "redirect:/myprofile.pro";
 	
 	@Autowired
 	private MemberDao memberDao;
