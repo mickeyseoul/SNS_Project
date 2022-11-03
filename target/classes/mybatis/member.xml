@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="member.model.MemberDao">
+	
+	<!-- 회원가입 -->
+	<insert id="RegisterMember">
+		insert into members(no,email,password,name,b_date,gender,hp1,hp2,hp3,addr1,addr2,addr3)
+		 values(mem_seq.nextval, #{email}, #{password}, #{name}, #{b_date}, #{gender}, #{hp1}, #{hp2}, #{hp3}, #{addr1}, #{addr2}, #{addr3})  
+	</insert>
+	
+	<select id="EmailDuplCheck" resultType="int">
+		select count(*) from members where email=#{inputemail}
+	</select>
+	
+	<!-- 회원리스트 -->
+	<select id="GetAllMembers" resultType="MyMember">
+		select * from members order by no
+	</select>
+	
+	<delete id="DeleteMember">
+		delete members where no=#{no}
+	</delete>
+	
+	<!-- 로그인 -->
+	<select id="Login" resultType="MyMember">
+		select * from members where email=#{email} and password=#{password}
+	</select>
+	
+	<!-- 마이페이지 -->
+	<update id="UpdateBackground">
+		update members set background=#{background} where no=#{no}
+	</update>
+	
+	<update id="UpdateProfile">
+		update members set profile=#{profile} where no=#{no}
+	</update>
+	
+	<select id="GetMemberByNo" resultType="MyMember">
+		select * from members where no=#{no}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="ModifyMember">
+		update members set name=#{name}, password=#{password}, b_date=#{b_date}, 
+		hp1=#{hp1}, hp2=#{hp2}, hp3=#{hp3}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3} 
+		where no=#{no}
+	</update>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
