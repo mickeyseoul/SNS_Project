@@ -37,9 +37,16 @@ public class FriendRequestController {
 		FriendBean myfriend = friendDao.getMyFriends(login.getNo());
 		
 		if(myfriend != null) { //이미 친구 리스트 있는 경우 -> 업데이트
-			String newList = myfriend.getFriends_no()+","+no;
-			bean.setFriends_no(newList);
-			friendDao.updateFriendsList(bean);
+			if(myfriend.getFriends_no() != null) {
+				String newList = myfriend.getFriends_no()+","+no;
+				bean.setFriends_no(newList);
+				friendDao.updateFriendsList(bean);
+			}else {
+				String newList = no;
+				bean.setFriends_no(newList);
+				friendDao.updateFriendsList(bean);
+				
+			}
 			
 		}else { //친구 리스트 없는 경우 -> 인서트
 			bean.setFriends_no(no); //친구 번호
@@ -54,9 +61,15 @@ public class FriendRequestController {
 		FriendBean friend = friendDao.getMyFriends(no);
 		
 		if(friend != null) { //이미 친구 리스트 있는 경우 -> 업데이트
-			String newList = friend.getFriends_no()+","+no;
-			bean2.setFriends_no(newList);
-			friendDao.updateFriendsList(bean2);
+			if(friend.getFriends_no() != null) {
+				String newList = friend.getFriends_no()+","+login.getNo();
+				bean2.setFriends_no(newList);
+				friendDao.updateFriendsList(bean2);
+			}else {
+				String newList = login.getNo();
+				bean2.setFriends_no(newList);
+				friendDao.updateFriendsList(bean2);
+			}
 			
 		}else { //친구 리스트 없는 경우 -> 인서트
 			bean2.setFriends_no(login.getNo()); //내 번호
