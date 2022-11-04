@@ -31,13 +31,12 @@ public class MyprofileController {
 	public String mypage(HttpSession session, Model model) {
 		
 		MemberBean member = (MemberBean)session.getAttribute("login");
-		
-		//친구 목록 가져오기
 		FriendBean myfriend = friendDao.getMyFriends(member.getNo());
 		//System.out.println(friend.getFriends_no());
 		
-		if(myfriend != null && myfriend.getFriends_no() != null) {
-			String[] lists = myfriend.getFriends_no().split(",");
+		//친구 목록 가져오기
+		if(myfriend != null && myfriend.getFriends() != null) {
+			String[] lists = myfriend.getFriends().split(",");
 			
 			List<MemberBean> friendsList = new ArrayList<MemberBean>();
 			for(String x : lists) {
@@ -48,6 +47,23 @@ public class MyprofileController {
 			
 			model.addAttribute("friendsList", friendsList);
 		}
+		
+		//친구 승인 대기 리스트 가져오기
+		if(myfriend != null && myfriend.getWaits() != null) {
+
+			String[] lists = myfriend.getWaits().split(",");
+
+			List<MemberBean> waitsList = new ArrayList<MemberBean>();
+			for(String x : lists) {
+				//System.out.println(x);
+				MemberBean friend = memberDao.getMemberByNo(x);
+				waitsList.add(friend);
+			}
+
+			model.addAttribute("myfriend", myfriend);
+			model.addAttribute("waitsList", waitsList);
+		}
+		
 		
 		
 		

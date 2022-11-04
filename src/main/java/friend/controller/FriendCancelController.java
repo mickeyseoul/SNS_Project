@@ -30,11 +30,11 @@ public class FriendCancelController {
 
 		//친구취소
 		FriendBean bean = new FriendBean();
-		bean.setFno(login.getNo()); //내 번호
+		bean.setMno(login.getNo()); //내 번호
 
 		FriendBean myfriend = friendDao.getMyFriends(login.getNo());
 
-		String[] list = myfriend.getFriends_no().split(",");
+		String[] list = myfriend.getFriends().split(",");
 		String newList = "";
 		
 		int i = 0;
@@ -50,17 +50,17 @@ public class FriendCancelController {
 			}
 		}
 
-		bean.setFriends_no(newList); //친구 번호
+		bean.setFriends(newList); //친구 번호
 		friendDao.updateFriendsList(bean);
 
 
 		//상대방 친구취소
 		FriendBean bean2 = new FriendBean();
-		bean2.setFno(no);
+		bean2.setMno(no);
 
 		FriendBean myfriend2 = friendDao.getMyFriends(no);
 
-		String[] list2 = myfriend2.getFriends_no().split(",");
+		String[] list2 = myfriend2.getFriends().split(",");
 		String newList2 = "";
 		
 		i = 0;
@@ -69,14 +69,14 @@ public class FriendCancelController {
 			i += 1;
 			if(x.equals(login.getNo()) == false) {
 				if(i == 1 ) {
-					newList += x;
+					newList2 += x;
 				}else {
-					newList += (","+x);
+					newList2 += (","+x);
 				}
 			}
 		}
 
-		bean2.setFriends_no(newList2);
+		bean2.setFriends(newList2);
 		friendDao.updateFriendsList(bean2);
 
 		return gotoPage+"?no="+no;

@@ -642,14 +642,16 @@
 																<img src="assets/images/avatar-4.jpg" alt="user image"
 																	class="img-radius img-40 align-top m-r-15">
 																<div class="d-inline-block">
-																	<h6>${ friend.name }</h6>
+																	<h6><a href="profile.pro?no=${ friend.no }">${ friend.name }</a></h6>
 																	<p class="text-muted m-b-0">Sales executive , NY</p>
 																</div>
 															</div>
 														</td>
 														<td class="text-right">
 															<h6 class="f-w-700">
-																$78.001<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
+																<input type="button" value="친구 취소"
+																onclick="javascript:location.href='cancel.fr?no=${ friend.no }'">
+																<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
 															</h6>
 														</td>
 													</tr>
@@ -657,6 +659,53 @@
 											</tbody>
 										</table>
 
+									</div>
+								</div>
+							</div>
+						</div>
+						
+<!-- 친구 승인 대기 리스트 -->
+						<!--  sale analytics start -->
+						<div id="friendList" class="col-xl-6 col-md-12">
+							<div class="card table-card">
+								<div class="card-header">
+									<h5>친구 승인 대기 리스트</h5>
+									<div class="card-header-right">
+										<ul class="list-unstyled card-option">
+											<li><i class="fa fa fa-wrench open-card-option"></i></li>
+											<li><i class="fa fa-window-maximize full-card"></i></li>
+											<li><i class="fa fa-minus minimize-card"></i></li>
+											<li><i class="fa fa-refresh reload-card"></i></li>
+											<li><i class="fa fa-trash close-card"></i></li>
+										</ul>
+									</div>
+								</div>
+								<div class="card-block">
+									<div class="table-responsive">
+										<table class="table table-hover m-b-0 without-header">
+											<tbody>
+												<c:forEach var="wait" items="${ waitsList }">
+													<tr>
+														<td>
+															<div class="d-inline-block align-middle">
+																<img src="assets/images/avatar-4.jpg" alt="user image"
+																	class="img-radius img-40 align-top m-r-15">
+																<div class="d-inline-block">
+																	<h6>${ wait.name }</h6>
+																	<p class="text-muted m-b-0">Sales executive , NY</p>
+																</div>
+															</div>
+														</td>
+														<td class="text-right">
+															<h6 class="f-w-700">
+																<input type="button" value="친구 수락"
+																onclick="javascript:location.href='accept.fr?no=${ wait.no }'"><i class="fas fa-level-down-alt text-c-red m-l-10"></i>
+															</h6>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
 									</div>
 								</div>
 							</div>

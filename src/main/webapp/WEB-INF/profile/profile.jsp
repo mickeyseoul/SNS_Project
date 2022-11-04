@@ -494,13 +494,19 @@
 												</a>
 											</h5>
 											<p id="mypageName" class="m-b-0">${ member.name }</p>
-											<c:if test="${ fn:contains(myfriend, member.no) }">
+											<c:if test="${ fn:contains(uwaits, login.no) }">
+												<p id="bgImgBtn"><input type="button" value="신청 취소" 
+													onclick="javascript:location.href='withdraw.fr?no=${ member.no }'"></p>
+											</c:if>
+											<c:if test="${ fn:contains(ufriends, login.no) }">
 												<p id="bgImgBtn"><input type="button" value="친구 취소" 
 													onclick="javascript:location.href='cancel.fr?no=${ member.no }'"></p>
 											</c:if>
-											<c:if test="${ fn:contains(myfriend, member.no) eq false }">
-												<p id="bgImgBtn"><input type="button" value="친구 신청" 
-													onclick="javascript:location.href='request.fr?no=${ member.no }'"></p>
+											<c:if test="${ fn:contains(ufriends, login.no) eq false }">
+												<c:if test="${ fn:contains(uwaits, login.no) eq false }">
+													<p id="bgImgBtn"><input type="button" value="친구 신청" 
+														onclick="javascript:location.href='request.fr?no=${ member.no }'"></p>
+												</c:if>
 											</c:if>
 										</div>
 									</div>
@@ -673,6 +679,7 @@
 								</div>
 							</div>
 						</div>
+						
 
 
 						<!--  sale analytics end -->

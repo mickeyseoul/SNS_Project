@@ -3,6 +3,8 @@ package profile.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +24,7 @@ public class ProfileController {
 
 	@Autowired
 	private MemberDao memberDao;
-	
+
 	@Autowired
 	private FriendDao friendDao;
 
@@ -32,12 +34,11 @@ public class ProfileController {
 		MemberBean member = memberDao.getMemberByNo(no);
 
 		//해당 프로필 친구 목록 가져오기
-		FriendBean myfriend = friendDao.getMyFriends(member.getNo());
-		//System.out.println(friend.getFriends_no());
+		FriendBean myfriend = friendDao.getMyFriends(no);
 
-		if(myfriend != null && myfriend.getFriends_no() != null) {
+		if(myfriend != null && myfriend.getFriends() != null) {
 
-			String[] lists = myfriend.getFriends_no().split(",");
+			String[] lists = myfriend.getFriends().split(",");
 
 			List<MemberBean> friendsList = new ArrayList<MemberBean>();
 			for(String x : lists) {
@@ -46,13 +47,17 @@ public class ProfileController {
 				friendsList.add(friend);
 			}
 
-			model.addAttribute("myfriend", myfriend);
+			model.addAttribute("ufriends", myfriend.getFriends());
 			model.addAttribute("friendsList", friendsList);
-		}		
+		}
+
+		//해당 유저의 친구 대기 목록 가져오기
+		if(myfriend != null && myfriend.getWaits() != null) {
+			String uwaits = myfriend.getWaits();
+			model.addAttribute("uwaits", uwaits);
+		}
 
 		model.addAttribute("member", member);
-		
-		
 
 		return getPage;
 	}
