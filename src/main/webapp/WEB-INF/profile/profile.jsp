@@ -499,7 +499,7 @@
 													onclick="javascript:location.href='withdraw.fr?no=${ member.no }'"></p>
 											</c:if>
 											<c:if test="${ fn:contains(ufriends, login.no) }">
-												<p id="bgImgBtn"><input type="button" value="친구 취소" 
+												<p id="bgImgBtn"><input type="button" value="친구 끊기" 
 													onclick="javascript:location.href='cancel.fr?no=${ member.no }'"></p>
 											</c:if>
 											<c:if test="${ fn:contains(ufriends, login.no) eq false }">
@@ -633,7 +633,7 @@
 						</div>
 
 
-						<!-- 친구 -->
+<!-- 친구 -->
 						<!--  sale analytics start -->
 						<div id="friendList" class="col-xl-6 col-md-12">
 							<div class="card table-card">

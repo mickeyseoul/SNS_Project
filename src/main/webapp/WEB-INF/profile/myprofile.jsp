@@ -649,7 +649,7 @@
 														</td>
 														<td class="text-right">
 															<h6 class="f-w-700">
-																<input type="button" value="친구 취소"
+																<input type="button" value="친구 끊기"
 																onclick="javascript:location.href='cancel.fr?no=${ friend.no }'">
 																<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
 															</h6>
@@ -699,7 +699,9 @@
 														<td class="text-right">
 															<h6 class="f-w-700">
 																<input type="button" value="친구 수락"
-																onclick="javascript:location.href='accept.fr?no=${ wait.no }'"><i class="fas fa-level-down-alt text-c-red m-l-10"></i>
+																onclick="javascript:location.href='accept.fr?no=${ wait.no }'"><br>
+																<input type="button" value="수락 거절"
+																onclick="javascript:location.href='refuse.fr?no=${ wait.no }'"><i class="fas fa-level-down-alt text-c-red m-l-10"></i>
 															</h6>
 														</td>
 													</tr>

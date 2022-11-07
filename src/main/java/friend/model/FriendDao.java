@@ -15,7 +15,6 @@ public class FriendDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	//친구 리스트
 	public FriendBean getMyFriends(String no) {
 		FriendBean friends = sqlSessionTemplate.selectOne(namespace+".GetMyFriends", no);
 		return friends;

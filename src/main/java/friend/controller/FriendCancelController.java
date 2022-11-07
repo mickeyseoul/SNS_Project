@@ -23,12 +23,13 @@ public class FriendCancelController {
 	@Autowired
 	private FriendDao friendDao;
 
+	//친구 끊기 버튼 클릭 => 로그인 유저/상대 유저 모두 friends 컬럼에서 삭제
 	@RequestMapping(command)
 	public String cancel(@RequestParam("no") String no, HttpSession session) {
 
 		MemberBean login = (MemberBean)session.getAttribute("login");
 
-		//친구취소
+		//2 로그인 유저에서 친구 삭제
 		FriendBean bean = new FriendBean();
 		bean.setMno(login.getNo()); //내 번호
 
@@ -40,8 +41,8 @@ public class FriendCancelController {
 		int i = 0;
 		for(String x : list) {
 			//System.out.println(x);
-			i += 1;
-			if(x.equals(no) == false) { //상대방 번호가 아니라면 친구 리스트에 추가
+			if(x.equals(no) == false) { //상대 유저가 아니라면 리스트에 추가
+				i += 1;
 				if(i == 1 ) {
 					newList += x;
 				}else {
@@ -50,11 +51,11 @@ public class FriendCancelController {
 			}
 		}
 
-		bean.setFriends(newList); //친구 번호
+		bean.setFriends(newList);
 		friendDao.updateFriendsList(bean);
 
 
-		//상대방 친구취소
+		//2 상대 유저에서 친구 삭제
 		FriendBean bean2 = new FriendBean();
 		bean2.setMno(no);
 
@@ -66,8 +67,8 @@ public class FriendCancelController {
 		i = 0;
 		for(String x : list2) {
 			//System.out.println(x);
-			i += 1;
-			if(x.equals(login.getNo()) == false) {
+			if(x.equals(login.getNo()) == false) { //로그인 유저가 아니라면 리스트에 추가
+				i += 1;
 				if(i == 1 ) {
 					newList2 += x;
 				}else {

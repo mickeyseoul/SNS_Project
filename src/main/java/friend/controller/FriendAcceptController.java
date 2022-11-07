@@ -20,22 +20,23 @@ public class FriendAcceptController {
 	@Autowired
 	private FriendDao friendDao;
 	
+	//친구 수락 버튼 클릭 => 로그인 유저/상대 유저 모두 friends 컬럼에 추가
 	@RequestMapping(command)
 	public String accept(@RequestParam("no") String no, HttpSession session) {
 		
 		MemberBean login = (MemberBean)session.getAttribute("login");
 		FriendBean bean = new FriendBean();
-		bean.setMno(login.getNo()); //내 번호
+		bean.setMno(login.getNo()); //로그인 유저 번호
 		
 		FriendBean myfriend = friendDao.getMyFriends(login.getNo());
 		
-		//1 승인 대기 목록에서 삭제
+		//1 로그인 유저의 승인 대기 목록에서 삭제
 		String[] arr = myfriend.getWaits().split(",");
 		String newWaits = "";
 		int i = 0;
 		for(String x : arr) {
-			i += 1;
 			if(!x.equals(no)) {
+				i += 1;
 				if(i == 1) {
 					newWaits += x;
 				}else {
@@ -47,8 +48,8 @@ public class FriendAcceptController {
 		friendDao.updateWaits(bean);
 		
 		
-		//2 나에게 친구 추가
-		if(myfriend != null) { //이미 친구 리스트 있는 경우 -> 업데이트
+		//2 로그인 유저에 친구 추가
+		if(myfriend != null) { //이미 데이터 있는 경우 -> 업데이트
 			String newList = "";
 			if(myfriend.getFriends() != null) {
 				newList = myfriend.getFriends()+","+no;
@@ -58,15 +59,15 @@ public class FriendAcceptController {
 			bean.setFriends(newList);
 			friendDao.updateFriendsList(bean);
 			
-		}
+		} // 데이터 없는 경우 없음
 		
-		//3 상대방에 나를 친구 추가
+		//3 상대 유저에 나를 친구 추가
 		FriendBean bean2 = new FriendBean();
-		bean2.setMno(no); //친구 번호
+		bean2.setMno(no); //상대 유저 번호
 		
 		FriendBean friend = friendDao.getMyFriends(no);
 		
-		if(friend != null) { //이미 친구 리스트 있는 경우 -> 업데이트
+		if(friend != null) { //이미 데이터 있는 경우 -> 업데이트
 			String newList = "";
 			if(friend.getFriends() != null) {
 				newList = friend.getFriends()+","+login.getNo();
@@ -76,7 +77,7 @@ public class FriendAcceptController {
 			bean2.setFriends(newList);
 			friendDao.updateFriendsList(bean2);
 			
-		}else { //친구 리스트 없는 경우 -> 인서트
+		}else { // 데이터 없는 경우 -> 인서트
 			bean2.setFriends(login.getNo()); //내 번호
 			friendDao.insertFriend(bean2);
 		}
