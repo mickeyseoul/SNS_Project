@@ -1,5 +1,7 @@
 package member.model;
 
+import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,7 +9,7 @@ public class MemberBean {
 	private String no;
 	@NotBlank(message = "이메일이 누락되었습니다.")
 	private String email;
-	@NotBlank(message = "비밀번호가 누락되었습니다.")
+	@Pattern(regexp = "^[a-zA-Z1-9]{4,10}$", message = "비밀번호는 4~10자 영문 대 소문자, 숫자를 사용하세요.")
 	private String password;
 	@NotBlank(message = "이름이 누락되었습니다.")
 	private String name;
@@ -34,6 +36,8 @@ public class MemberBean {
 	private String deactivate;
 	private String social;
 	private String save;
+	private String business;
+	private String business_no;
 	
 	//사진 등록
 	private MultipartFile uploadProfile;
@@ -152,6 +156,19 @@ public class MemberBean {
 	}
 	public void setSave(String save) {
 		this.save = save;
+	}
+	
+	public String getBusiness() {
+		return business;
+	}
+	public void setBusiness(String business) {
+		this.business = business;
+	}
+	public String getBusiness_no() {
+		return business_no;
+	}
+	public void setBusiness_no(String business_no) {
+		this.business_no = business_no;
 	}
 	//사진등록
 	public MultipartFile getUploadProfile() {

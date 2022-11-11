@@ -7,8 +7,9 @@
 	
 	<!-- 회원가입 -->
 	<insert id="RegisterMember">
-		insert into members(no,email,password,name,b_date,gender,hp1,hp2,hp3,addr1,addr2,addr3)
-		 values(mem_seq.nextval, #{email}, #{password}, #{name}, #{b_date}, #{gender}, #{hp1}, #{hp2}, #{hp3}, #{addr1}, #{addr2}, #{addr3})  
+		insert into members(no,email,password,name,b_date,gender,hp1,hp2,hp3,addr1,addr2,addr3,business,business_no)
+		 values(mem_seq.nextval, #{email}, #{password}, #{name}, #{b_date}, #{gender}, #{hp1}, #{hp2}, #{hp3}, 
+		 #{addr1}, #{addr2}, #{addr3}, #{business}, #{business_no})  
 	</insert>
 	
 	<select id="EmailDuplCheck" resultType="int">
@@ -20,7 +21,7 @@
 		select * from members order by no
 	</select>
 	
-	<delete id="DeleteMember">
+	<delete id="DeleteMember1">
 		delete members where no=#{no}
 	</delete>
 	
@@ -43,11 +44,24 @@
 	</select>
 	
 	<!-- 회원 정보 수정 -->
+	<select id="CheckEmailPassword" resultType="int">
+		select count(*) from members where no=#{no} and password=#{password}
+	</select>
+	
 	<update id="ModifyMember">
 		update members set name=#{name}, password=#{password}, b_date=#{b_date}, 
 		hp1=#{hp1}, hp2=#{hp2}, hp3=#{hp3}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3} 
 		where no=#{no}
 	</update>
+	
+	<update id="DeactivateMember">
+		update members set deactivate=1 where no=#{no} and password=#{password}
+	</update>
+	
+	<delete id="DeleteMember">
+		delete members where no=#{no} and password=#{password}
+	</delete>
+	
 
 </mapper>
 

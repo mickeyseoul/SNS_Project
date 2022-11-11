@@ -1,34 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>
-<!-- updateBackgroundForm.jsp<br> -->
+<!-- modifyForm.jsp<br> -->
 
 <!DOCTYPE html>
 <html lang="en">
 
 <script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/jquery.js"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-	//alert("ready");
-	
-	//파일 클릭했을 때 보여지는 이미지
-	$("#gdsImg").change(function(){
-		if(this.files && this.files[0]) { //파일을 등록했다면?
-		    var reader = new FileReader;
-		    reader.onload = function(data) {
-		    	$(".select_img img").attr("src", data.target.result).width(500); //파일 크기 변환..
-		   	}
-	    	reader.readAsDataURL(this.files[0]);
-		}
-	  });
-	 
-	
-});
-
+	$(document).ready(function(){
+		
+		//submit 버튼 눌렀을 때
+		$("#btnSubmit").click(function(){
+			//alert("submit");
+			
+			//비밀번호가 일치하지 않을 때
+			if($("input[name='password']").val() != $("input[name='passwordChk']").val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				return false;
+			}
+			
+		});
+		
+	});//ready
 
 </script>
 
 <style>
+.err{
+	font-size: 9pt;
+	color : red;
+	font-weight: bold;
+}
+
 #navProfile {
 	border-radius: 100px;
 	width: 40px;
@@ -41,24 +45,28 @@ $(document).ready(function(){
 	height: 80px;
 }
 
-#content {
-	width: 50%;
-	margin-left: 25%;
+#content{
+	width: 40%;
+	margin-left: 27%;
 }
 
-.select_img{
-	margin-top: 10px;
+td{
+	height: 50px;
+}
+
+#hp{
+	width: 30%;
+	float: left;
+}
+
+#spanHp{
+	float: left;
+}
+
+#addr{
 	margin-bottom: 10px;
-	overflow: hidden;
-	height: 160px; 
-	width: 500px;
-	
 }
 
-#img{
-	margin-top: -20%;
-
-}
 </style>
 
 <head>
@@ -304,7 +312,8 @@ $(document).ready(function(){
 											<img id="sideProfile"
 												src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
 												alt="User-Profile-Image">
-										</c:if> <c:if test="${ login.profile ne null }">
+										</c:if> 
+										<c:if test="${ login.profile ne null }">
 											<img id="sideProfile"
 												src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
 												alt="User-Profile-Image">
@@ -465,57 +474,104 @@ $(document).ready(function(){
 							</ul>
 						</div>
 					</nav>
-					<div class="pcoded-content">
-						<!-- Page-header start -->
-
-						<!-- Page-header end -->
-						<div class="pcoded-inner-content">
-							<div class="main-body">
-								<div class="page-wrapper">
-									<div class="page-body">
-										<div class="row">
-
-											<!-- 컨텐츠 -->
-											<div class="col-sm-12">
-												<div class="card" id="content">
-													<div class="card-header">
-														<h4>배경 사진 업데이트</h4>
-														<span></span>
-
-														<div class="card-block">
-															<p>
-															<form action="updateImage.pro" method="post"
-																enctype="multipart/form-data">
-																<input type="hidden" name="name" value="background">
+                    <div class="pcoded-content">
+                        <!-- Page-header start -->
+                        
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <div class="page-body">
+                                        <div class="row">
+                                        
+                                        <!-- 컨텐츠 -->
+                                            <div class="col-sm-12">
+                                                <div class="card" id="content">
+                                                    <div class="card-header">
+                                                        <h4>회원정보 수정</h4>
+                                                        <span></span>
+                                                        
+                                                    <div class="card-block">
+                                                        <p>
+                                                        	<form:form commandName="member" action="modify2.mem" method="post">
 																<input type="hidden" name="no" value="${ login.no }">
-																<input type="file" id="gdsImg" name="uploadBackground"><br>													
-																<div class="select_img"><img id="img" src=""/></div>
-																
-																<button type="button" class="btn btn-default waves-effect" 
-			                                        				 onclick="javascript:location.href='myprofile.pro'">취소</button>
-																<input type="submit" value="사진등록" class="btn btn-primary waves-effect waves-light">
-															</form>
-															</p>
-														</div>
-													</div>
-												</div>
-												<!-- //컨텐츠 -->
-
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="styleSelector"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Warning Section Starts -->
-		<!-- Older IE warning message -->
-		<!--[if lt IE 10]>
+																<table>
+																	<tr>
+																		<td width="30%">이메일</td>
+																		<td><input type="text" name="email" value="${ login.email }" 
+																		class="form-control" placeholder=".form-control" disabled="disabled">
+																		<input type="hidden" name="email" value="${ login.email }"></td>
+																	</tr>
+																	<tr>
+																		<td>이름</td>
+																		<td><input type="text" name="name" value="${ login.name }" class="form-control" placeholder=".form-control"></td>
+																	</tr>
+																	<tr>
+																		<td>비밀번호</td>
+																		<td><input type="text" name="password" value="${ member.password }" class="form-control" placeholder="4~10자 영문 대 소문자, 숫자">
+																		<form:errors cssClass="err" path="password"></form:errors></td>
+																	</tr>
+																	<tr>
+																		<td>비밀번호 확인</td>
+																		<td><input type="text" name="passwordChk" class="form-control" placeholder="비밀번호 확인"></td>
+																	</tr>
+																	<!-- <tr>
+																		<td>성별</td>
+																		<td><input type="radio" name="gender" value="man"
+																			checked="checked">남 <input type="radio" name="gender"
+																			value="woman">여</td>
+																	</tr> -->
+																	<tr>
+																		<td>생년월일</td>
+																		<fmt:parseDate var="b_date" pattern="yyyy-MM-dd" value="${ login.b_date }"/>
+																		<fmt:formatDate var="b_date2" pattern="yyyy-MM-dd" value="${ b_date }"/>
+																		<td><input type="date" name="b_date" value="${ b_date2 }" class="form-control"></td>
+																	</tr>
+																	<tr>
+																		<td>핸드폰번호</td>
+																		<td><input type="text" name="hp1" value="${ login.hp1 }" id="hp" class="form-control" placeholder=".form-control">
+																			<span id="spanHp">&nbsp;-&nbsp;</span>
+																			<input type="text" name="hp2" value="${ login.hp2 }" id="hp" class="form-control" placeholder=".form-control">
+																			<span id="spanHp">&nbsp;-&nbsp;</span>
+																			<input type="text" name="hp3" value="${ login.hp3 }" id="hp" class="form-control" placeholder=".form-control">
+																	</tr>
+																	<tr>
+																		<td valign="top">주소</td>
+																		<td><input type="text" name="addr1" value="${ login.addr1 }" id="addr" class="form-control" placeholder=".form-control">
+																			<input type="text" name="addr2" value="${ login.addr2 }" id="addr" class="form-control" placeholder=".form-control"> 
+																			<input type="text" name="addr3" value="${ login.addr3 }" id="addr" class="form-control" placeholder=".form-control">
+																		</td>
+																	</tr>
+																	<tr height="60px;" valign="bottom">
+																		<td colspan="2">
+																			<input type="button" value="취소" class="btn btn-default waves-effect"
+																			 onclick="javascript:location.href='settings.pro'">
+																			 <input type="submit" value="수정" id="btnSubmit" class="btn btn-primary waves-effect waves-light">
+																		 </td>
+																	</tr>
+																</table>
+															</form:form>
+                                                      	</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+											<!-- //컨텐츠 -->
+		
+											
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="styleSelector"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
         <div class="ie-warning">
             <h1>Warning!!</h1>
             <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -556,29 +612,31 @@ $(document).ready(function(){
             <p>Sorry for the inconvenience!</p>
         </div>
     <![endif]-->
-		<!-- Warning Section Ends -->
-		<!-- Required Jquery -->
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/jquery/jquery.min.js "></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/jquery-ui/jquery-ui.min.js "></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/popper.js/popper.min.js"></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/bootstrap/js/bootstrap.min.js "></script>
-		<!-- waves js -->
-		<script
-			src="<%=request.getContextPath()%>/resources/assets/pages/waves/js/waves.min.js"></script>
-		<!-- jquery slimscroll js -->
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
-		<script
-			src="<%=request.getContextPath()%>/resources/assets/js/pcoded.min.js"></script>
-		<script
-			src="<%=request.getContextPath()%>/resources/assets/js/vertical/vertical-layout.min.js"></script>
-		<script
-			src="<%=request.getContextPath()%>/resources/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-		<!-- Custom js -->
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/script.js"></script>
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/jquery/jquery.min.js "></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/jquery-ui/jquery-ui.min.js "></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/popper.js/popper.min.js"></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/bootstrap/js/bootstrap.min.js "></script>
+	<!-- waves js -->
+	<script
+		src="<%=request.getContextPath()%>/resources/assets/pages/waves/js/waves.min.js"></script>
+	<!-- jquery slimscroll js -->
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/resources/assets/js/pcoded.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/resources/assets/js/vertical/vertical-layout.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/resources/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<!-- Custom js -->
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/script.js"></script>
 </body>
+
+

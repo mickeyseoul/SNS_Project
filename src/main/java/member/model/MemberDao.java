@@ -33,9 +33,9 @@ public class MemberDao {
 		lists = sqlSessionTemplate.selectList(namespace+".GetAllMembers");
 		return lists;
 	}
-
-	public void deleteMember(String no) {
-		sqlSessionTemplate.delete(namespace+".DeleteMember", no);
+	
+	public void deleteMember1(String no) {
+		sqlSessionTemplate.delete(namespace+".DeleteMember1", no);
 		
 	}
 	
@@ -62,12 +62,28 @@ public class MemberDao {
 	}
 	
 	//회원정보 수정
-	public void modifyMember(MemberBean member) {
-		sqlSessionTemplate.update(namespace+".ModifyMember", member);
-		
+	public int checkEmailPassword(MemberBean member) {
+		int result = sqlSessionTemplate.selectOne(namespace+".CheckEmailPassword", member);
+		return result;
 	}
 	
+	public int modifyMember(MemberBean member) {
+		int result = sqlSessionTemplate.update(namespace+".ModifyMember", member);
+		return result;
+		
+	}
+
+	public int deactivateMember(MemberBean member) {
+		int result = sqlSessionTemplate.update(namespace+".DeactivateMember", member);
+		return result;
+	}
 	
+	public int deleteMember(MemberBean member) {
+		int result = sqlSessionTemplate.delete(namespace+".DeleteMember", member);
+		return result;
+	}
+
+
 	
 	
 	

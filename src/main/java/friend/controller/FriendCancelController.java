@@ -18,7 +18,7 @@ import member.model.MemberBean;
 public class FriendCancelController {
 
 	private final String command = "/cancel.fr";
-	private String gotoPage = "redirect:/profile.pro";
+	private String gotoPage = "redirect:/myprofile.pro";
 
 	@Autowired
 	private FriendDao friendDao;

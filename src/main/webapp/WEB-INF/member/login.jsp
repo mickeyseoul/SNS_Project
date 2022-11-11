@@ -145,7 +145,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <button type="button" class="btn btn-success waves-effect waves-light"
-                                            onclick="javascipt:location.href='register.mem'" style="width: 410px;">회원가입</button>
+                                            onclick="javascipt:location.href='register1.mem'" style="width: 410px; margin-top: -15px;">회원가입</button>
                                         </div>
                                     </div>
 

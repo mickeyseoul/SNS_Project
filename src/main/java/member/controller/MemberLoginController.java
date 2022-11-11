@@ -43,15 +43,30 @@ public class MemberLoginController {
 		int result = memberDao.emailDuplCheck(member.getEmail());
 		if(result == 1) { //가입한 회원인 경우
 			MemberBean login = memberDao.login(member);
+			
 			if(login == null) { //이메일과 비밀번호가 일치하지 않은 경우
 				//System.out.println("login "+login);
 				pw.println("<script>");
 				pw.println("alert('비밀번호가 일치하지 않습니다.'); location.href='login.mem'");
 				pw.println("</script>");
 				pw.flush();
+				
 			}else { //이메일과 비밀번호가 일치하는 경우 => 로그인
 				//System.out.println("login.getName() "+login.getName());
 				session.setAttribute("login", login);
+				//String destination = (String)session.getAttribute("destination");
+				//return destination;
+				
+				/* 로그인이 필요한 페이지에 설정할 코드
+				if(session.getAttribute("login") == null) { //로그인 안했으면
+					
+					session.setAttribute("destination", "redirect:/"); //로그인 한 후 향할 주소도 같이 설정해 보냄
+					return "redirect:/login.mem";
+				
+				}else {
+					
+				}
+				*/
 
 			}
 			

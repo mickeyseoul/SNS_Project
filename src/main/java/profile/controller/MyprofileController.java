@@ -30,12 +30,12 @@ public class MyprofileController {
 	@RequestMapping(command)
 	public String mypage(HttpSession session, Model model) {
 		
-		MemberBean member = (MemberBean)session.getAttribute("login");
+		MemberBean login = (MemberBean)session.getAttribute("login");
 		
-		FriendBean myfriend = friendDao.getMyFriends(member.getNo());
+		FriendBean myfriend = friendDao.getMyFriends(login.getNo());
 		//System.out.println(friend.getFriends_no());
 		
-		//친구 목록 가져오기
+		//friends 친구 가져오기
 		if(myfriend != null && myfriend.getFriends() != null) {
 			String[] lists = myfriend.getFriends().split(",");
 			
@@ -49,7 +49,7 @@ public class MyprofileController {
 			model.addAttribute("friendsList", friendsList);
 		}
 		
-		//친구 승인 대기 리스트 가져오기
+		//waits 친구 신청 목록 가져오기
 		if(myfriend != null && myfriend.getWaits() != null) {
 
 			String[] lists = myfriend.getWaits().split(",");
@@ -61,7 +61,6 @@ public class MyprofileController {
 				waitsList.add(friend);
 			}
 
-			model.addAttribute("myfriend", myfriend);
 			model.addAttribute("waitsList", waitsList);
 		}
 		

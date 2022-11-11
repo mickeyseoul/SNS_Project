@@ -1,32 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/common.jsp" %>
-<!-- updateBackgroundForm.jsp<br> -->
+<!-- deactivateForm<br> -->
 
 <!DOCTYPE html>
 <html lang="en">
-
-<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/jquery.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	//alert("ready");
-	
-	//파일 클릭했을 때 보여지는 이미지
-	$("#gdsImg").change(function(){
-		if(this.files && this.files[0]) { //파일을 등록했다면?
-		    var reader = new FileReader;
-		    reader.onload = function(data) {
-		    	$(".select_img img").attr("src", data.target.result).width(500); //파일 크기 변환..
-		   	}
-	    	reader.readAsDataURL(this.files[0]);
-		}
-	  });
-	 
-	
-});
-
-
-</script>
 
 <style>
 #navProfile {
@@ -41,23 +19,9 @@ $(document).ready(function(){
 	height: 80px;
 }
 
-#content {
+#content{
 	width: 50%;
 	margin-left: 25%;
-}
-
-.select_img{
-	margin-top: 10px;
-	margin-bottom: 10px;
-	overflow: hidden;
-	height: 160px; 
-	width: 500px;
-	
-}
-
-#img{
-	margin-top: -20%;
-
 }
 </style>
 
@@ -304,7 +268,8 @@ $(document).ready(function(){
 											<img id="sideProfile"
 												src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
 												alt="User-Profile-Image">
-										</c:if> <c:if test="${ login.profile ne null }">
+										</c:if> 
+										<c:if test="${ login.profile ne null }">
 											<img id="sideProfile"
 												src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
 												alt="User-Profile-Image">
@@ -465,57 +430,76 @@ $(document).ready(function(){
 							</ul>
 						</div>
 					</nav>
-					<div class="pcoded-content">
-						<!-- Page-header start -->
-
-						<!-- Page-header end -->
-						<div class="pcoded-inner-content">
-							<div class="main-body">
-								<div class="page-wrapper">
-									<div class="page-body">
-										<div class="row">
-
-											<!-- 컨텐츠 -->
-											<div class="col-sm-12">
-												<div class="card" id="content">
-													<div class="card-header">
-														<h4>배경 사진 업데이트</h4>
-														<span></span>
-
-														<div class="card-block">
-															<p>
-															<form action="updateImage.pro" method="post"
-																enctype="multipart/form-data">
-																<input type="hidden" name="name" value="background">
-																<input type="hidden" name="no" value="${ login.no }">
-																<input type="file" id="gdsImg" name="uploadBackground"><br>													
-																<div class="select_img"><img id="img" src=""/></div>
+                    <div class="pcoded-content">
+                        <!-- Page-header start -->
+                        
+                        <!-- Page-header end -->
+                        <div class="pcoded-inner-content">
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <div class="page-body">
+                                        <div class="row">
+                                        
+                                        <!-- 컨텐츠 -->
+                                            <div class="col-sm-12">
+                                                <div class="card" id="content">
+                                                    <div class="card-header">
+                                                        <h4>계정 비활성화 또는 삭제</h4>
+                                                        <span></span>
+                                                        
+                                                    <div class="card-block">
+                                                        <p>
+                                                        	<form action="deactivate1.mem" method="post">
+																<table>
+																	<tr>
+																		<td>
+																		<input type="radio" name="delete" value="deactivate" checked="checked">
+																		<font size="4px">계정 비활성화</font><br>
+																		&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">일시적으로 비활성화할 수 있습니다.</font><br>
+																		&nbsp;&nbsp;&nbsp;&nbsp;계정이 비활성화되며 공유한 대부분의 콘텐츠에서 회원님의 이름과 사진이 
+																		&nbsp;&nbsp;&nbsp;&nbsp;삭제됩니다.
+																		</td>
+																	</tr>
+																	<tr>
+																		<td>
+																		<input type="radio" name="delete" value="delete">
+																		<font size="4px">계정 삭제</font><br>
+																		&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">영구적으로 삭제됩니다.</font><br>
+																		&nbsp;&nbsp;&nbsp;&nbsp;계정을 삭제하면 공유한 모든 콘텐츠나 정보를 가져올 수 없게 됩니다.
+																		</td>
+																	</tr>
+																	<tr height="60px;" valign="bottom">
+																		<td>
+																		<input type="button" value="취소"  class="btn btn-default waves-effect"
+																		 onclick="javascript:location.href='settings.pro'">
+																		<input type="submit" value="계속" class="btn btn-primary waves-effect waves-light">
+																		</td>
+																	</tr>
 																
-																<button type="button" class="btn btn-default waves-effect" 
-			                                        				 onclick="javascript:location.href='myprofile.pro'">취소</button>
-																<input type="submit" value="사진등록" class="btn btn-primary waves-effect waves-light">
+																</table>
 															</form>
-															</p>
-														</div>
-													</div>
-												</div>
-												<!-- //컨텐츠 -->
-
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div id="styleSelector"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Warning Section Starts -->
-		<!-- Older IE warning message -->
-		<!--[if lt IE 10]>
+                                                      	</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+											<!-- //컨텐츠 -->
+											
+		
+											
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="styleSelector"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Warning Section Starts -->
+    <!-- Older IE warning message -->
+    <!--[if lt IE 10]>
         <div class="ie-warning">
             <h1>Warning!!</h1>
             <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
@@ -556,29 +540,34 @@ $(document).ready(function(){
             <p>Sorry for the inconvenience!</p>
         </div>
     <![endif]-->
-		<!-- Warning Section Ends -->
-		<!-- Required Jquery -->
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/jquery/jquery.min.js "></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/jquery-ui/jquery-ui.min.js "></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/popper.js/popper.min.js"></script>
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/bootstrap/js/bootstrap.min.js "></script>
-		<!-- waves js -->
-		<script
-			src="<%=request.getContextPath()%>/resources/assets/pages/waves/js/waves.min.js"></script>
-		<!-- jquery slimscroll js -->
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
-		<script
-			src="<%=request.getContextPath()%>/resources/assets/js/pcoded.min.js"></script>
-		<script
-			src="<%=request.getContextPath()%>/resources/assets/js/vertical/vertical-layout.min.js"></script>
-		<script
-			src="<%=request.getContextPath()%>/resources/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
-		<!-- Custom js -->
-		<script type="text/javascript"
-			src="<%=request.getContextPath()%>/resources/assets/js/script.js"></script>
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/jquery/jquery.min.js "></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/jquery-ui/jquery-ui.min.js "></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/popper.js/popper.min.js"></script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/bootstrap/js/bootstrap.min.js "></script>
+	<!-- waves js -->
+	<script
+		src="<%=request.getContextPath()%>/resources/assets/pages/waves/js/waves.min.js"></script>
+	<!-- jquery slimscroll js -->
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/resources/assets/js/pcoded.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/resources/assets/js/vertical/vertical-layout.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/resources/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<!-- Custom js -->
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/resources/assets/js/script.js"></script>
 </body>
+
+
+
+
+ 

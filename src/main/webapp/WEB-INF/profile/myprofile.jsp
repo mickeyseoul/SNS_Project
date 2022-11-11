@@ -1,10 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../common/common.jsp" %>
+<%@ include file="../common/common.jsp"%>
 <!-- mypage.jsp<br> -->
 
 <!DOCTYPE html>
 <html lang="en">
+
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/jquery.js"></script>
+<script type="text/javascript">
+function goFriendTab(){
+	//alert(1);
+	$("#friendTab").click();
+	
+}
+
+function goPictureTab(){
+	//alert(1);
+	$("#pictureTab").click();
+	
+}
+</script>
 
 <style>
 #navProfile {
@@ -19,37 +34,72 @@
 	height: 80px;
 }
 
-#mypageHeader {
+/* 프로파일 헤더 */
+#profileHeader {
 	height: 370px;
-	background-image: url("<%=request.getContextPath()%>/resources/assets/images/members/${ login.background }");
+	background-image:
+		url("<%=request.getContextPath()%>/resources/assets/images/members/${ login.background }");
+	background-size: 1200px;
+	background-position: center;
 }
 
-#mypageProfile {
+#profileHeader-profile {
 	border-radius: 100px;
 	margin-top: 110px;
 	width: 200px;
 	height: 200px;
 }
 
-#mypageName {
+#profileHeader-name {
 	font-size: 40px;
 	color: black;
 	margin-left: 220px;
 	margin-top: -70px;
 }
 
-#bgImgBtn{
+#bgImgBtn {
 	margin-left: 1000px;
-	margin-top: -30px;
+	margin-top: -50px;
 }
 
-#intro {
+/* 프로파일 nav */
+#mainNav{
+	height: 60px;
+}
+
+#mainNavTab{
+	margin-top: -20px;
+}
+
+#mainNavContent{
+	width: 70%;
+	margin-left: 150px;
+}
+
+/* 프로파일 컨텐트 */
+#content1 {
 	width: 500px;
 }
 
-#friendList {
-	width: 500px;
+#friendProfile {
+	border-radius: 10px;
+	width: 160px;
+	height: 160px;
 }
+
+#friendProfile-td{
+	padding-top: 10px;
+	padding-left: 40px; 
+
+}
+
+#friendProfile2 {
+	border-radius: 10px;
+	width: 60px;
+	height: 60px;
+}
+
+
 </style>
 
 <head>
@@ -247,21 +297,18 @@
 							<li class="user-profile header-notification"><a href="#!"
 								class="waves-effect waves-light"> <!-- class="img-radius" -->
 									<c:if test="${ login.profile eq null }">
-											<img id="navProfile"
-												src="<%= request.getContextPath() %>/resources/assets/images/members/profile.png"
-												alt="User-Profile-Image">
-									</c:if>
-									<c:if test="${ login.profile ne null }">
 										<img id="navProfile"
-										src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
-										alt="User-Profile-Image">
-									</c:if> 
-									<span>${ login.name }</span> <i
-									class="ti-angle-down"></i>
+											src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
+											alt="User-Profile-Image">
+									</c:if> <c:if test="${ login.profile ne null }">
+										<img id="navProfile"
+											src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
+											alt="User-Profile-Image">
+									</c:if> <span>${ login.name }</span> <i class="ti-angle-down"></i>
 							</a>
 								<ul class="show-notification profile-notification">
-									<li class="waves-effect waves-light"><a href="settings.pro"> <i
-											class="ti-settings"></i> 설정 및 개인정보
+									<li class="waves-effect waves-light"><a
+										href="settings.pro"> <i class="ti-settings"></i> 설정 및 개인정보
 									</a></li>
 									<!-- <li class="waves-effect waves-light"><a
 										href="user-profile.html"> <i class="ti-user"></i> Profile
@@ -285,7 +332,7 @@
 <!-- ### nav 이외의 영역 ### -->
 			<div class="pcoded-main-container">
 				<div class="pcoded-wrapper">
-<!-- ### 1 사이드바 ### -->
+<!-- ### 사이드바 ### -->
 					<nav class="pcoded-navbar">
 						<div class="sidebar_toggle">
 							<a href="#"><i class="icon-close icons"></i></a>
@@ -294,16 +341,16 @@
 							<div class="">
 								<div class="main-menu-header">
 									<a href="myprofile.pro"> <!-- class="img-80 img-radius" -->
-									<c:if test="${ login.profile eq null }">
+										<c:if test="${ login.profile eq null }">
 											<img id="sideProfile"
-												src="<%= request.getContextPath() %>/resources/assets/images/members/profile.png"
+												src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
 												alt="User-Profile-Image">
-									</c:if>
-									<c:if test="${ login.profile ne null }">
-									<img id="sideProfile"
-										src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
-										alt="User-Profile-Image">
-									</c:if>
+										</c:if> 
+										<c:if test="${ login.profile ne null }">
+											<img id="sideProfile"
+												src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
+												alt="User-Profile-Image">
+										</c:if>
 									</a>
 									<div class="user-details">
 										<span id="more-details">${ login.name }<i
@@ -460,34 +507,38 @@
 							</ul>
 						</div>
 					</nav>
-<!-- ### 1 끝 ### -->				
-<!-- ### 2 메인 ### -->
+<!-- ### //사이드바 ### -->
+					
+
+<!-- ### 프로필 ### -->
 					<div class="pcoded-content">
-<!-- ### 2-1 메인 해더 ### -->
+<!-- ### 프로필 헤더 ### -->
 						<!-- Page-header start -->
-						<div id="mypageHeader" class="page-header">
+						<div id="profileHeader" class="page-header">
 							<div class="page-block">
 								<div class="row align-items-center">
 									<div class="col-md-8">
 										<div class="page-header-title">
 											<h5 class="m-b-10">
 												<!-- class="img-80 img-radius" -->
-												<a href="updateImage.pro?img=profile">
-													<c:if test="${ login.profile eq null }">
-														<img id="mypageProfile"
-														src="<%= request.getContextPath() %>/resources/assets/images/members/profile.png"
-														alt="User-Profile-Image">
-													</c:if>
-													<c:if test="${ login.profile ne null }"> 
-														<img id="mypageProfile"
-														src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
-														alt="User-Profile-Image">
+												<a href="updateImage.pro?img=profile"> 
+												<c:if test="${ login.profile eq null }">
+														<img id="profileHeader-profile"
+															src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
+															alt="User-Profile-Image">
+													</c:if> 
+													<c:if test="${ login.profile ne null }">
+														<img id="profileHeader-profile"
+															src="<%= request.getContextPath() %>/resources/assets/images/members/${ login.profile }"
+															alt="User-Profile-Image">
 													</c:if>
 												</a>
 											</h5>
-											<p id="mypageName" class="m-b-0">${ login.name }</p>
-											<p id="bgImgBtn"><input type="button" value="배경 사진 추가" 
-											onclick="javascript:location.href='updateImage.pro?img=background'"></p>
+											<p id="profileHeader-name" class="m-b-0">${ login.name }</p>
+											<p id="bgImgBtn">
+												<input type="button" value="배경 사진 추가" class="btn btn-default waves-effect"
+													onclick="javascript:location.href='updateImage.pro?img=background'">
+											</p>
 										</div>
 									</div>
 									<!-- <div class="col-md-4">
@@ -502,334 +553,264 @@
 								</div>
 							</div>
 						</div>
-						<!-- Page-header end -->
-<!-- ### 2-1 끝 ### -->
-<!-- ### 2-2 메인 컨텐츠 ### -->
-<!-- nav -->
-						<!-- Material tab card start -->
-						<div class="card">
-							<div class="card-block">
-								<!-- Row start -->
-								<div class="row m-b-30">
-									<div class="col-lg-12 col-xl-6">
+<!-- Page-header end -->
+<!-- ### //프로필 헤더 ### -->
 
-										<!-- Nav tabs -->
-										<ul class="nav nav-tabs md-tabs" role="tablist">
-											<li class="nav-item"><a class="nav-link active"
-												data-toggle="tab" href="#home3" role="tab">게시물</a>
-												<div class="slide"></div></li>
-											<li class="nav-item"><a class="nav-link"
-												data-toggle="tab" href="#profile3" role="tab">정보</a>
-												<div class="slide"></div></li>
-											<li class="nav-item"><a class="nav-link"
-												data-toggle="tab" href="#messages3" role="tab">친구</a>
-												<div class="slide"></div></li>
-											<li class="nav-item"><a class="nav-link"
-												data-toggle="tab" href="#settings3" role="tab">사진</a>
-												<div class="slide"></div></li>
-										</ul>
-										<!-- Tab panes -->
-										<!-- <div class="tab-content card-block">
-											<div class="tab-pane active" id="home3" role="tabpanel">
-												<p class="m-0">1. This is Photoshop's version of Lorem
-													IpThis is Photoshop's version of Lorem Ipsum. Proin gravida
-													nibh vel velit auctor aliquet. Aenean sollicitudin, lorem
-													quis bibendum auctor, nisi elit consequat ipsum, nec
-													sagittis sem nibh id elit. Lorem ipsum dolor sit amet,
-													consectetuer adipiscing elit. Aenean commodo ligula eget
-													dolor. Aenean mas Cum sociis natoque penatibus et magnis
-													dis.....</p>
-											</div>
-											<div class="tab-pane" id="profile3" role="tabpanel">
-												<p class="m-0">2.Cras consequat in enim ut efficitur.
-													Nulla posuere elit quis auctor interdum praesent sit amet
-													nulla vel enim amet. Donec convallis tellus neque, et
-													imperdiet felis amet.</p>
-											</div>
-											<div class="tab-pane" id="messages3" role="tabpanel">
-												<p class="m-0">3. This is Photoshop's version of Lorem
-													IpThis is Photoshop's version of Lorem Ipsum. Proin gravida
-													nibh vel velit auctor aliquet. Aenean sollicitudin, lorem
-													quis bibendum auctor, nisi elit consequat ipsum, nec
-													sagittis sem nibh id elit. Lorem ipsum dolor sit amet,
-													consectetuer adipiscing elit. Aenean commodo ligula eget
-													dolor. Aenean mas Cum sociis natoque penatibus et magnis
-													dis.....</p>
-											</div>
-											<div class="tab-pane" id="settings3" role="tabpanel">
-												<p class="m-0">4.Cras consequat in enim ut efficitur.
-													Nulla posuere elit quis auctor interdum praesent sit amet
-													nulla vel enim amet. Donec convallis tellus neque, et
-													imperdiet felis amet.</p>
-											</div>
-										</div> -->
-									</div>
-								</div>
-								<!-- Row end -->
+
+<!-- ### 프로필 nav/컨텐트 ### -->
+						<!-- nav -->
+						<!-- Material tab card start -->
+						<div class="card" id="mainNav">
+							<div class="card-block">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs md-tabs" role="tablist" id="mainNavTab">
+									<li class="nav-item"><a class="nav-link active"
+										data-toggle="tab" href="#home3" role="tab">게시물</a>
+										<div class="slide"></div></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#profile3" role="tab">정보</a>
+										<div class="slide"></div></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#messages3" id="friendTab" role="tab">친구</a>
+										<div class="slide"></div></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab"
+										href="#settings3" id="pictureTab" role="tab">사진</a>
+										<div class="slide"></div></li>
+								</ul>
 							</div>
 						</div>
 						<!-- Material tab card end -->
 
-<!-- 소개 -->
-						<div id="intro" class="col-xl-6 col-md-12">
-							<div class="card table-card">
-								<div class="card-header">
-									<h5>소개</h5>
-									<div class="card-header-right">
-										<ul class="list-unstyled card-option">
-											<li><i class="fa fa fa-wrench open-card-option"></i></li>
-											<li><i class="fa fa-window-maximize full-card"></i></li>
-											<li><i class="fa fa-minus minimize-card"></i></li>
-											<li><i class="fa fa-refresh reload-card"></i></li>
-											<li><i class="fa fa-trash close-card"></i></li>
-										</ul>
+						<!-- Tab panes -->
+						<div class="tab-content card-block">
+							<div class="tab-pane active" id="home3" role="tabpanel">
+								<!-- 소개 -->
+								<div id="content1" class="col-xl-6 col-md-12">
+									<div class="card table-card">
+										<div class="card-header">
+											<h5>소개</h5>
+										</div>
+										<div class="card-block">
+											<p>소개글 작성하기</p>
+											<a href="profile.pro?no=6">### 6번 회원 프로필 ###</a>
+										</div>
 									</div>
 								</div>
-								<div class="card-block">
-									<p>소개글 작성하기</p>
-									<a href="profile.pro?no=6">### 6번 회원 프로필 ###</a>
+								<!-- 사진 -->
+								<div id="content1" class="col-xl-6 col-md-12">
+									<div class="card table-card">
+										<div class="card-header">
+											<h5>사진</h5>
+											<div class="card-header-right">
+												<a href="javascript:goPictureTab()"><font color="#4374D9">모든 사진 보기</font></a>
+											</div>
+										</div>
+										<div class="card-block">
+											<p>사진 리스트</p>
+										</div>
+									</div>
 								</div>
+								<!-- 친구 -->
+								<div id="content1" class="col-xl-6 col-md-12">
+									<div class="card table-card">
+										<div class="card-header">
+											<h5>친구</h5>
+											<br> 친구 ${ fn:length(friendsList) }명
+											<div class="card-header-right">
+												<a href="javascript:goFriendTab()"><font color="#4374D9">모든 친구 보기</font></a>
+											</div>
+										</div>
+										<div class="card-block">
+											<div class="table-responsive">
+												<table>
+													<tbody>
+														<tr>
+														<c:forEach var="friend" items="${ friendsList }" varStatus="i">
+															<c:if test="${ i.count <= 4 }">
+																<td id="friendProfile-td">
+																		<c:if test="${ friend.profile eq null }">
+																			<a href="profile.pro?no=${ friend.no }"><img
+																				id="friendProfile"
+																				src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
+																				alt="User-Profile-Image"></a>
+																		</c:if>
+																		<c:if test="${ friend.profile ne null }">
+																			<a href="profile.pro?no=${ friend.no }"><img
+																				id="friendProfile"
+																				src="<%= request.getContextPath() %>/resources/assets/images/members/${ friend.profile }"
+																				alt="user image"
+																				class="img-radius img-40 align-top m-r-15"></a>
+																		</c:if>
+																			<br><a href="profile.pro?no=${ friend.no }"><h6>${ friend.name }</h6></a>
+																</td>
+																<c:if test="${ i.count == 2 }">
+																	</tr>
+																	<tr>
+																</c:if>
+															</c:if>	
+														</c:forEach>
+													</tbody>
+												</table>
+												
+												<c:if test="${ fn:length(friendsList) > 4 }">
+													<hr>
+													<div align="center">
+														<a href="javascript:goFriendTab()"><font color="#4374D9">친구 더보기</font></a>
+													</div>
+												</c:if>
+
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- //친구 -->
+								
+
+							</div>
+							<div class="tab-pane" id="profile3" role="tabpanel">
+								<p class="m-0">
+								<div class="card" id="mainNavContent">
+									<div class="card-block">
+										<h5>Simple Breadcrumb</h5>
+										
+									</div>
+									
+								</div>
+								</p>
+							</div>
+							
+							<div class="tab-pane" id="messages3" role="tabpanel">
+								<!-- 친구 요청 -->
+								<div class="card" id="mainNavContent">
+									<div class="card-block">
+										<h5>친구 요청</h5>
+										
+										<div class="card-block">
+											<div class="table-responsive">
+												<table class="table table-hover m-b-0 without-header">
+													<tbody>
+														<c:if test="${ waitsList eq null }">
+															<center><h6>친구 요청이 없습니다</h6></center>
+														</c:if>
+														<c:forEach var="wait" items="${ waitsList }">
+															<tr>
+																<td>
+																	<div class="d-inline-block align-middle">
+																		<c:if test="${ friend.profile eq null }">
+																			<a href="profile.pro?no=${ wait.no }"><img
+																				id="friendProfile2"
+																				src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
+																				alt="User-Profile-Image"></a>
+																		</c:if>
+																		<c:if test="${ friend.profile ne null }">
+																			<a href="profile.pro?no=${ wait.no }"><img
+																				id="friendProfile2"
+																				src="<%= request.getContextPath() %>/resources/assets/images/members/${ wait.profile }"
+																				alt="user image"
+																				class="img-radius img-40 align-top m-r-15"></a>
+																		</c:if>
+																		<div class="d-inline-block">
+																			<h6>
+																				&nbsp;&nbsp;&nbsp;<a href="profile.pro?no=${ wait.no }">${ wait.name }</a>
+																			</h6>
+																			<!-- <p class="text-muted m-b-0">ales executive , NY</p> -->
+																		</div>
+																	</div>
+																</td>
+																<td class="text-right">
+																	<h6 class="f-w-700">
+																		<input type="button" value="친구 수락" class="btn btn-primary waves-effect waves-light" 
+																			onclick="javascript:location.href='accept.fr?no=${ wait.no }'"><br>
+																		<input type="button" value="친구 거절" class="btn btn-default waves-effect" 
+																			style="margin-right: -10px;"
+																			onclick="javascript:location.href='refuse.fr?no=${ wait.no }'"><i
+																			class="fas fa-level-down-alt text-c-red m-l-10"></i>
+																	</h6>
+																</td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+								<!-- //친구 요청 -->
+								<!-- 친구 -->
+								<div class="card" id="mainNavContent">
+									<div class="card-block">
+										<h5>친구</h5>
+										
+										<div class="card-block">
+											<div class="table-responsive">
+												<table class="table table-hover m-b-0 without-header">
+													<tbody>
+														<c:if test="${ friendsList eq null }">
+															<center><h6>표시할 친구가 없습니다</h6></center>
+														</c:if>
+														<c:forEach var="friend" items="${ friendsList }">
+															<tr>
+																<td>
+																	<div class="d-inline-block align-middle">
+																		<c:if test="${ friend.profile eq null }">
+																			<a href="profile.pro?no=${ friend.no }"><img
+																				id="friendProfile2"
+																				src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
+																				alt="User-Profile-Image"></a>
+																		</c:if>
+																		<c:if test="${ friend.profile ne null }">
+																			<a href="profile.pro?no=${ friend.no }"><img
+																				id="friendProfile2"
+																				src="<%= request.getContextPath() %>/resources/assets/images/members/${ friend.profile }"
+																				alt="user image"
+																				class="img-radius img-40 align-top m-r-15"></a>
+																		</c:if>
+																		<div class="d-inline-block">
+																			<h6>
+																				<br><a href="profile.pro?no=${ friend.no }">${ friend.name }</a>
+																			</h6>
+																			<!-- <p class="text-muted m-b-0">Sales executive , NY</p> -->
+																		</div>
+																	</div>
+																</td>
+																<td class="text-right">
+																	<h6 class="f-w-700">
+																		<input type="button" value="친구 끊기" class="btn btn-default waves-effect" 
+																			onclick="javascript:location.href='cancel.fr?no=${ friend.no }'">
+																		<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
+																	</h6>
+																</td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+								<!-- //친구 -->	
+
+							</div>
+							<div class="tab-pane" id="settings3" role="tabpanel">
+								<p class="m-0">
+								<div class="card" id="mainNavContent">
+									<div class="card-block">
+										<h5>Simple Breadcrumb</h5>
+										
+									</div>
+									
+								</div>
+								</p>
 							</div>
 						</div>
 						
-<!-- 사진 -->
-						<div id="intro" class="col-xl-6 col-md-12">
-							<div class="card table-card">
-								<div class="card-header">
-									<h5>사진</h5>
-									<div class="card-header-right">
-										<ul class="list-unstyled card-option">
-											<li><i class="fa fa fa-wrench open-card-option"></i></li>
-											<li><i class="fa fa-window-maximize full-card"></i></li>
-											<li><i class="fa fa-minus minimize-card"></i></li>
-											<li><i class="fa fa-refresh reload-card"></i></li>
-											<li><i class="fa fa-trash close-card"></i></li>
-										</ul>
-									</div>
-								</div>
-								<div class="card-block">
-									<p>사진 리스트</p>
-								</div>
-							</div>
-						</div>
-
-
-<!-- 친구 -->
-
-						<!--  sale analytics start -->
-						<div id="friendList" class="col-xl-6 col-md-12">
-							<div class="card table-card">
-								<div class="card-header">
-									<h5>친구</h5>
-									<div class="card-header-right">
-										<ul class="list-unstyled card-option">
-											<li><i class="fa fa fa-wrench open-card-option"></i></li>
-											<li><i class="fa fa-window-maximize full-card"></i></li>
-											<li><i class="fa fa-minus minimize-card"></i></li>
-											<li><i class="fa fa-refresh reload-card"></i></li>
-											<li><i class="fa fa-trash close-card"></i></li>
-										</ul>
-									</div>
-								</div>
-								<div class="card-block">
-									<div class="table-responsive">
-										<table class="table table-hover m-b-0 without-header">
-											<tbody>
-												<c:forEach var="friend" items="${ friendsList }">
-													<tr>
-														<td>
-															<div class="d-inline-block align-middle">
-																<img src="assets/images/avatar-4.jpg" alt="user image"
-																	class="img-radius img-40 align-top m-r-15">
-																<div class="d-inline-block">
-																	<h6><a href="profile.pro?no=${ friend.no }">${ friend.name }</a></h6>
-																	<p class="text-muted m-b-0">Sales executive , NY</p>
-																</div>
-															</div>
-														</td>
-														<td class="text-right">
-															<h6 class="f-w-700">
-																<input type="button" value="친구 끊기"
-																onclick="javascript:location.href='cancel.fr?no=${ friend.no }'">
-																<i class="fas fa-level-down-alt text-c-red m-l-10"></i>
-															</h6>
-														</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						
-<!-- 친구 승인 대기 리스트 -->
-						<!--  sale analytics start -->
-						<div id="friendList" class="col-xl-6 col-md-12">
-							<div class="card table-card">
-								<div class="card-header">
-									<h5>친구 승인 대기 리스트</h5>
-									<div class="card-header-right">
-										<ul class="list-unstyled card-option">
-											<li><i class="fa fa fa-wrench open-card-option"></i></li>
-											<li><i class="fa fa-window-maximize full-card"></i></li>
-											<li><i class="fa fa-minus minimize-card"></i></li>
-											<li><i class="fa fa-refresh reload-card"></i></li>
-											<li><i class="fa fa-trash close-card"></i></li>
-										</ul>
-									</div>
-								</div>
-								<div class="card-block">
-									<div class="table-responsive">
-										<table class="table table-hover m-b-0 without-header">
-											<tbody>
-												<c:forEach var="wait" items="${ waitsList }">
-													<tr>
-														<td>
-															<div class="d-inline-block align-middle">
-																<img src="assets/images/avatar-4.jpg" alt="user image"
-																	class="img-radius img-40 align-top m-r-15">
-																<div class="d-inline-block">
-																	<h6>${ wait.name }</h6>
-																	<p class="text-muted m-b-0">Sales executive , NY</p>
-																</div>
-															</div>
-														</td>
-														<td class="text-right">
-															<h6 class="f-w-700">
-																<input type="button" value="친구 수락"
-																onclick="javascript:location.href='accept.fr?no=${ wait.no }'"><br>
-																<input type="button" value="수락 거절"
-																onclick="javascript:location.href='refuse.fr?no=${ wait.no }'"><i class="fas fa-level-down-alt text-c-red m-l-10"></i>
-															</h6>
-														</td>
-													</tr>
-												</c:forEach>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-						<!--  sale analytics end -->
-
-
-						<!-- Multiple Open Accordion start -->
-						<!-- <div class="col-lg-6">
-							<div class="card">
-								<div class="card-header">
-									<h5 class="card-header-text">아코디언</h5>
-								</div>
-								<div class="card-block accordion-block">
-									<div id="accordion" role="tablist" aria-multiselectable="true">
-										<div class="accordion-panel">
-											<div class="accordion-heading" role="tab" id="headingOne">
-												<h3 class="card-title accordion-title">
-													<a class="accordion-msg waves-effect waves-dark"
-														data-toggle="collapse" data-parent="#accordion"
-														href="#collapseOne" aria-expanded="true"
-														aria-controls="collapseOne"> Lorem Message 1 </a>
-												</h3>
-											</div>
-											<div id="collapseOne" class="panel-collapse collapse in"
-												role="tabpanel" aria-labelledby="headingOne">
-												<div class="accordion-content accordion-desc">
-													<p>Lorem Ipsum is simply dummy text of the printing and
-														typesetting industry. Lorem Ipsum has been the industry's
-														standard dummy text ever since the 1500s, when an unknown
-														printer took a galley of type and scrambled it to make a
-														type specimen book. It has survived not only five
-														centuries, but also the leap into electronic typesetting,
-														remaining essentially unchanged. It was popularised in the
-														1960s with the release of Letraset sheets containing Lorem
-														Ipsum passages, and more recently with desktop publishing
-														software like Aldus PageMaker including versions of Lorem
-														Ipsum.</p>
-												</div>
-											</div>
-										</div>
-										<div class="accordion-panel">
-											<div class="accordion-heading" role="tab" id="headingTwo">
-												<h3 class="card-title accordion-title">
-													<a class="accordion-msg waves-effect waves-dark"
-														data-toggle="collapse" data-parent="#accordion"
-														href="#collapseTwo" aria-expanded="false"
-														aria-controls="collapseTwo"> Lorem Message 2 </a>
-												</h3>
-											</div>
-											<div id="collapseTwo" class="panel-collapse collapse"
-												role="tabpanel" aria-labelledby="headingTwo">
-												<div class="accordion-content accordion-desc">
-													<p>Lorem Ipsum is simply dummy text of the printing and
-														typesetting industry. Lorem Ipsum has been the industry's
-														standard dummy text ever since the 1500s, when an unknown
-														printer took a galley of type and scrambled it to make a
-														type specimen book. It has survived not only five
-														centuries, but also the leap into electronic typesetting,
-														remaining essentially unchanged. It was popularised in the
-														1960s with the release of Letraset sheets containing Lorem
-														Ipsum passages, and more recently with desktop publishing
-														software like Aldus PageMaker including versions of Lorem
-														Ipsum.</p>
-												</div>
-											</div>
-										</div>
-										<div class="accordion-panel">
-											<div class=" accordion-heading" role="tab" id="headingThree">
-												<h3 class="card-title accordion-title">
-													<a class="accordion-msg waves-effect waves-dark"
-														data-toggle="collapse" data-parent="#accordion"
-														href="#collapseThree" aria-expanded="false"
-														aria-controls="collapseThree"> Lorem Message 3 </a>
-												</h3>
-											</div>
-											<div id="collapseThree" class="panel-collapse collapse"
-												role="tabpanel" aria-labelledby="headingThree">
-												<div class="accordion-content accordion-desc">
-													<p>Lorem Ipsum is simply dummy text of the printing and
-														typesetting industry. Lorem Ipsum has been the industry's
-														standard dummy text ever since the 1500s, when an unknown
-														printer took a galley of type and scrambled it to make a
-														type specimen book. It has survived not only five
-														centuries, but also the leap into electronic typesetting,
-														remaining essentially unchanged. It was popularised in the
-														1960s with the release of Letraset sheets containing Lorem
-														Ipsum passages, and more recently with desktop publishing
-														software like Aldus PageMaker including versions of Lorem
-														Ipsum.</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> -->
-						<!-- Multiple Open Accordion ends -->
-
-						<!-- Simple Breadcrumb card start -->
-						<!-- <div class="card">
-							<div class="card-block">
-								<h5>Simple Breadcrumb</h5>
-								<div class="page-header-breadcrumb">
-									<ul class="breadcrumb">
-										<li class="breadcrumb-item"><a href="#!"> <i
-												class="icofont icofont-home"></i>
-										</a></li>
-										<li class="breadcrumb-item"><a href="#!">Breadcrumb</a></li>
-										<li class="breadcrumb-item"><a href="#!">Simple
-												Breadcrumb</a></li>
-									</ul>
-								</div>
-							</div>
-						</div> -->
-						<!-- Simple Breadcrumb card start -->
 					</div>
-<!-- ### 2-2 끝 ### -->
-<!-- ### nav 이외의 영역 끝 ###	 -->
-				
+<!-- ### //프로필 컨텐트 ### -->
+<!-- ### // nav 이외 영역 ###	 -->
+					<div class="card"></div>
+					<div class="card"></div>
 					<div id="styleSelector"></div>
 				</div>
 			</div>

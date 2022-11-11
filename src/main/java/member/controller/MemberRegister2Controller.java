@@ -10,32 +10,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import member.model.MemberBean;
 import member.model.MemberDao;
 
 @Controller
-public class MemberRegisterController {
+public class MemberRegister2Controller {
 	
-	private final String command = "/register.mem";
-	private String getPage = "/registerForm";
-	private String gotoPage = "redirect:/login.mem";
+	private final String command = "/register2.mem";
+	private String getPage = "/registerForm2";
 	
 	@Autowired
 	private MemberDao memberDao;
 	
-	//회원가입 버튼 -> registerForm.jsp
-	@RequestMapping(value = command, method = RequestMethod.GET)
-	public String register() {
-		return getPage;
-	}
-	
-	//registerForm.jsp에서 회원가입 진행
+	//registerForm2.jsp에서 회원가입 진행
 	@RequestMapping(value = command, method = RequestMethod.POST)
-	public String register(@Valid MemberBean member, BindingResult result, 
+	public String register(@ModelAttribute("member") @Valid MemberBean member, BindingResult result, 
 			Model model, HttpServletResponse response) throws IOException {
+		
+		//System.out.println(member.getEmail());
 		
 		if(result.hasErrors()) {
 			return getPage;

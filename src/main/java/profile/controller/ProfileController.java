@@ -33,7 +33,7 @@ public class ProfileController {
 
 		MemberBean member = memberDao.getMemberByNo(no);
 
-		//해당 프로필 친구 목록 가져오기
+		//해당 유저 friends 가져오기
 		FriendBean myfriend = friendDao.getMyFriends(no);
 
 		if(myfriend != null && myfriend.getFriends() != null) {
@@ -51,7 +51,7 @@ public class ProfileController {
 			model.addAttribute("friendsList", friendsList);
 		}
 
-		//해당 유저의 친구 대기 목록 가져오기
+		//해당 유저 waits 가져오기
 		if(myfriend != null && myfriend.getWaits() != null) {
 			String uwaits = myfriend.getWaits();
 			model.addAttribute("uwaits", uwaits);
