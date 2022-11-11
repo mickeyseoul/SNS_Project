@@ -83,6 +83,11 @@ public class MemberDao {
 		return result;
 	}
 
+	public void updateIntro(MemberBean member) {
+		sqlSessionTemplate.update(namespace+".UpdateIntro", member);
+		
+	}
+
 
 	
 	

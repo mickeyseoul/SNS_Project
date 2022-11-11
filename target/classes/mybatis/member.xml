@@ -43,6 +43,10 @@
 		select * from members where no=#{no}
 	</select>
 	
+	<update id="UpdateIntro">
+		update members set intro=#{intro} where no=#{no}
+	</update>
+	
 	<!-- 회원 정보 수정 -->
 	<select id="CheckEmailPassword" resultType="int">
 		select count(*) from members where no=#{no} and password=#{password}

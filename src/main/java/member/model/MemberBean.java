@@ -38,6 +38,7 @@ public class MemberBean {
 	private String save;
 	private String business;
 	private String business_no;
+	private String intro;
 	
 	//사진 등록
 	private MultipartFile uploadProfile;
@@ -169,6 +170,12 @@ public class MemberBean {
 	}
 	public void setBusiness_no(String business_no) {
 		this.business_no = business_no;
+	}
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
 	}
 	//사진등록
 	public MultipartFile getUploadProfile() {

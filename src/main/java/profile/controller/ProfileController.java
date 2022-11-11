@@ -29,7 +29,7 @@ public class ProfileController {
 	private FriendDao friendDao;
 
 	@RequestMapping(command)
-	public String userpage(@RequestParam("no") String no, Model model) {
+	public String userpage(@RequestParam("no") String no, Model model, HttpSession session) {
 
 		MemberBean member = memberDao.getMemberByNo(no);
 
@@ -58,6 +58,14 @@ public class ProfileController {
 		}
 
 		model.addAttribute("member", member);
+		
+		//로그인 유저 waits 가져오기
+		MemberBean login = (MemberBean)session.getAttribute("login");
+		myfriend = friendDao.getMyFriends(login.getNo());
+		if(myfriend != null && myfriend.getWaits() != null) {
+			String mywaits = myfriend.getWaits();
+			model.addAttribute("mywaits", mywaits);
+		}
 
 		return getPage;
 	}

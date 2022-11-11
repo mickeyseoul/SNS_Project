@@ -39,7 +39,7 @@ function goPictureTab(){
 	height: 370px;
 	background-image:
 		url("<%=request.getContextPath()%>/resources/assets/images/members/${ member.background }");
-	background-size: 1200px;
+	background-size: 1300px;
 	background-position: center;
 }
 
@@ -535,6 +535,11 @@ function goPictureTab(){
 												</a>
 											</h5>
 											<p id="profileHeader-name" class="m-b-0">${ member.name }</p>
+											<c:if test="${ fn:contains(mywaits, member.no) }">
+												<p id="bgImgBtn"><input type="button" value="친구 수락" class="btn btn-primary waves-effect waves-light"
+													onclick="javascript:location.href='accept.fr?no=${ member.no }'"></p>
+											</c:if>
+											
 											<c:if test="${ fn:contains(uwaits, login.no) }">
 												<p id="bgImgBtn"><input type="button" value="신청 취소" class="btn btn-default waves-effect"
 													onclick="javascript:location.href='withdraw.fr?no=${ member.no }'"></p>
@@ -545,8 +550,10 @@ function goPictureTab(){
 											</c:if>
 											<c:if test="${ fn:contains(ufriends, login.no) eq false }">
 												<c:if test="${ fn:contains(uwaits, login.no) eq false }">
-													<p id="bgImgBtn"><input type="button" value="친구 신청" class="btn btn-primary waves-effect waves-light"
-														onclick="javascript:location.href='request.fr?no=${ member.no }'"></p>
+													<c:if test="${ fn:contains(mywaits, member.no) eq false }">
+														<p id="bgImgBtn"><input type="button" value="친구 신청" class="btn btn-primary waves-effect waves-light"
+															onclick="javascript:location.href='request.fr?no=${ member.no }'"></p>
+													</c:if>
 												</c:if>
 											</c:if>
 										</div>
@@ -602,8 +609,7 @@ function goPictureTab(){
 											<h5>소개</h5>
 										</div>
 										<div class="card-block">
-											<p>소개글 작성하기</p>
-											<a href="profile.pro?no=6">### 6번 회원 프로필 ###</a>
+											<div style="margin-top: 10px; margin-left: 10px;">${ member.intro }</div>
 										</div>
 									</div>
 								</div>
