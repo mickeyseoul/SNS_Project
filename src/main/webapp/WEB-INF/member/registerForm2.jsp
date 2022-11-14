@@ -328,7 +328,7 @@ td {
 
 
 								<div class="row m-t-25 text-left">
-									<div class="col-md-12">
+									<!-- <div class="col-md-12">
 										<div class="checkbox-fade fade-in-primary">
 											<label> <input type="checkbox" value=""> <span
 												class="cr"><i
@@ -348,7 +348,7 @@ td {
 											</span>
 											</label>
 										</div>
-									</div>
+									</div> -->
 								</div>
 								<div class="row m-t-30">
 									<div class="col-md-12">

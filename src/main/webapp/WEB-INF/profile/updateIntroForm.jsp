@@ -459,14 +459,14 @@
 												<div class="card" id="content">
 													<div class="card-header">
 														<h4>소개 업데이트</h4>
-														<span></span>
+														<!-- <span></span> -->
 
 														<div class="card-block">
 															<p>
-															소개를 입력해주세요
+															<!-- <font size="3px">소개를 입력해주세요</font> -->
 															<form action="updateIntro.pro" method="post">
 																<input type="hidden" name="no" value="${ login.no }">
-																<textarea name="intro" rows="3" cols="60">${ login.intro }</textarea>
+																<textarea name="intro" rows="4" cols="60" placeholder="소개를 입력해주세요">${ login.intro }</textarea>
 																<br><br>
 																<button type="button" class="btn btn-default waves-effect" 
 			                                        				 onclick="javascript:location.href='myprofile.pro'">취소</button>

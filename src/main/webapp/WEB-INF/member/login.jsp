@@ -127,11 +127,11 @@
                                     <div class="row m-t-25 text-left">
                                         <div class="col-12">
                                             <div class="checkbox-fade fade-in-primary d-">
-                                                <label>
+                                                <!-- <label>
                                                     <input type="checkbox" value="">
                                                     <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
                                                     <span class="text-inverse">Remember me</span>
-                                                </label>
+                                                </label> -->
                                             </div>
                                             <div class="forgot-phone text-right f-right">
                                             	 <a href="findId.mem" class="text-right f-w-600">아이디 찾기</a>&nbsp;|
