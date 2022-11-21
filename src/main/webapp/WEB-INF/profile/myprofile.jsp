@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/jquery.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/assets/js/jquery/jquery.js"></script>
 <script type="text/javascript">
 function goFriendTab(){
 	//alert(1);
@@ -80,13 +80,14 @@ function goPictureTab(){
 }
 
 #mainNavContent{
-	width: 70%;
-	margin-left: 150px;
+	width: 50%;
+	margin-left: 300px;
 }
 
 /* 프로파일 컨텐트 */
 #content1 {
-	width: 500px;
+	width: 1000px;
+	margin-left: 300px;
 }
 
 #friendProfile {
@@ -97,7 +98,7 @@ function goPictureTab(){
 
 #friendProfile-td{
 	padding-top: 10px;
-	padding-left: 40px; 
+	padding-left: 80px; 
 
 }
 
@@ -578,10 +579,10 @@ function goPictureTab(){
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs md-tabs" role="tablist" id="mainNavTab">
 									<li class="nav-item"><a class="nav-link active"
-										data-toggle="tab" href="#home3" role="tab">게시물</a>
+										data-toggle="tab" href="#home3" role="tab">정보</a>
 										<div class="slide"></div></li>
 									<li class="nav-item"><a class="nav-link" data-toggle="tab"
-										href="#profile3" role="tab">정보</a>
+										href="#profile3" role="tab">게시물</a>
 										<div class="slide"></div></li>
 									<li class="nav-item"><a class="nav-link" data-toggle="tab"
 										href="#messages3" id="friendTab" role="tab">친구</a>
@@ -621,7 +622,7 @@ function goPictureTab(){
 									</div>
 								</div>
 								<!-- 사진 -->
-								<div id="content1" class="col-xl-6 col-md-12">
+								<!-- <div id="content1" class="col-xl-6 col-md-12">
 									<div class="card table-card">
 										<div class="card-header">
 											<h5>사진</h5>
@@ -633,7 +634,7 @@ function goPictureTab(){
 											<p>사진 리스트</p>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<!-- 친구 -->
 								<div id="content1" class="col-xl-6 col-md-12">
 									<div class="card table-card">
@@ -735,6 +736,7 @@ function goPictureTab(){
 										<div class="card-block">
 											<div class="table-responsive">
 												<a href="profile.pro?no=9">### 9번 회원 프로필 ###</a>
+												<a href="profile.pro?no=2">### 2번 회원 프로필 ###</a>
 											</div>
 										</div>
 										

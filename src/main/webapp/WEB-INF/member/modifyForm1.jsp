@@ -457,7 +457,7 @@
 																<tr>
 																	<td>
 																		<img id="sideProfile"
-																			src="<%=request.getContextPath()%>/resources/assets/images/members/profile.png"
+																			src="<%=request.getContextPath()%>/resources/assets/images/members/${ login.profile }"
 																			alt="User-Profile-Image">
 																		&nbsp;&nbsp;<font size="4px;">${ login.email }</font>
 																	</td>

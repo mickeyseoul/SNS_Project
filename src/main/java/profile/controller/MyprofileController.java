@@ -32,6 +32,8 @@ public class MyprofileController {
 		
 		MemberBean login = (MemberBean)session.getAttribute("login");
 		
+		System.out.println(login.getNo());
+		
 		FriendBean myfriend = friendDao.getMyFriends(login.getNo());
 		//System.out.println(friend.getFriends_no());
 		

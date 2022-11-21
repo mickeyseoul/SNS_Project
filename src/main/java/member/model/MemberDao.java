@@ -87,6 +87,34 @@ public class MemberDao {
 		sqlSessionTemplate.update(namespace+".UpdateIntro", member);
 		
 	}
+	
+	// 소셜 로그인
+	public void registerMemberBySocial(MemberBean member) {
+		sqlSessionTemplate.insert(namespace+".RegisterMemberBySocial", member);
+		
+	}
+
+	public MemberBean getMemberByEmail(String email) {
+		MemberBean member = sqlSessionTemplate.selectOne(namespace+".GetMemberByEmail", email);
+		return member;
+	}
+
+	//아이디 비번 찾기
+	public void updatePassword(MemberBean member) {
+		sqlSessionTemplate.update(namespace+".UpdatePassword", member);
+		
+	}
+
+	public MemberBean findId(MemberBean member) {
+		MemberBean bean = sqlSessionTemplate.selectOne(namespace+".FindId", member);
+		return bean;
+	}
+
+	public MemberBean findPassword(MemberBean member) {
+		MemberBean bean = sqlSessionTemplate.selectOne(namespace+".FindPassword", member);
+		return bean;
+	}
+
 
 
 	

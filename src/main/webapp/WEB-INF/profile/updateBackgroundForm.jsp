@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/jquery.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/assets/js/jquery/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	//alert("ready");

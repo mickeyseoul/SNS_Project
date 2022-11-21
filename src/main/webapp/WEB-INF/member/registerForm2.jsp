@@ -3,7 +3,19 @@
 <%@ include file="../common/common.jsp"%>
 <!-- registerForm.jsp<br> -->
 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
+// 다음 지도 api
+function goAddr(){
+        //카카오 지도 발생
+        new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+                document.f.addr1.value = data.zonecode; // zone 넣기
+                document.f.addr2.value = data.address; // 주소 넣기
+                document.f.addr3.focus(); //상세입력 포커싱
+            }
+        }).open();
+}
 
 function gochk(){
 	//alert(f.business.value);
@@ -90,7 +102,7 @@ function gochk(){
 
 <style>
 .err {
-	font-size: 9pt;
+	font-size: 8pt;
 	color: red;
 	font-weight: bold;
 }
@@ -302,17 +314,20 @@ td {
 												name="hp2" value="9876" id="hp" class="form-control"
 												placeholder=".form-control"> <span id="spanHp">&nbsp;-&nbsp;</span>
 												<input type="text" name="hp3" value="5432" id="hp"
-												class="form-control" placeholder=".form-control"> <form:errors
-													cssClass="err" path="hp3"></form:errors></td>
+												class="form-control" placeholder=".form-control"> 
+												<form:errors cssClass="err" path="hp3"></form:errors></td>
 										</tr>
 										<tr>
 											<td valign="top">주소</td>
-											<td><input type="text" name="addr1" value="서울시"
-												id="addr" class="form-control" placeholder=".form-control">
-												<input type="text" name="addr2" value="마포구" id="addr"
-												class="form-control" placeholder=".form-control"> <input
-												type="text" name="addr3" value="중앙빌딩" id="addr"
-												class="form-control" placeholder=".form-control"></td>
+											<td><input type="text" name="addr1" id="addr"
+												style="width: 100px; float: left; margin-right: 10px;" class="form-control" placeholder="우편번호" readonly>
+												<input type="button" value="우편번호 찾기" class="btn btn-default waves-effect" 
+												style="font-size: 3px;" onclick="goAddr()">
+												<input type="text" name="addr2" id="addr"
+												class="form-control" placeholder="주소" readonly> 
+												<input type="text" name="addr3" id="addr"
+												class="form-control" placeholder="상세주소">
+												<form:form cssClass="err" path="addr3"></form:form></td>
 										</tr>
 										<tr>
 											<td valign="top">사업자</td>
@@ -359,7 +374,7 @@ td {
 											onclick="javascript:location.href='login.mem'">취소</button>
 									</div>
 								</div>
-								<hr />
+								<%-- <hr />
 								<div class="row">
 									<div class="col-md-10">
 										<p class="text-inverse text-left m-b-0">Thank you.</p>
@@ -372,7 +387,7 @@ td {
 											src="<%= request.getContextPath() %>/resources/assets/images/auth/Logo-small-bottom.png"
 											alt="small-logo.png">
 									</div>
-								</div>
+								</div> --%>
 							</div>
 						</div>
 					</form:form>

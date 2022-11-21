@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!-- registerForm1.jsp<br> -->
 
-<script type="text/javascript" src="<%= request.getContextPath() %>/resources/js/jquery.js"></script>
+<script type="text/javascript" src="<%= request.getContextPath() %>/resources/assets/js/jquery/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		//alert("ready");
@@ -192,7 +192,7 @@
                                     </table>
                                 </div>
                                
-                                <hr/>
+                                <%-- <hr/>
                                 <div class="row">
                                     <div class="col-md-10">
                                         <p class="text-inverse text-left m-b-0">Thank you.</p>
@@ -201,7 +201,7 @@
                                     <div class="col-md-2">
                                         <img src="<%= request.getContextPath() %>/resources/assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
                                     </div>
-                                </div>
+                                </div> --%>
                             </div>
                         </div>
                     </form>

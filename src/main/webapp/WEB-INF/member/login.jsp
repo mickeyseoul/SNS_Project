@@ -5,6 +5,27 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+<style>
+#social_btnImg{
+	width: 30px;
+	height: 30px;
+	margin: -20px;
+}
+
+
+
+</style>
+
+
+
+
+
+
+
 <head>
     <title>Material Able bootstrap admin template by Codedthemes</title>
     <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
@@ -135,7 +156,7 @@
                                             </div>
                                             <div class="forgot-phone text-right f-right">
                                             	 <a href="findId.mem" class="text-right f-w-600">아이디 찾기</a>&nbsp;|
-                                                <a href="auth-reset-password.html" class="text-right f-w-600">비밀번호 찾기</a>
+                                                <a href="findPassword.mem" class="text-right f-w-600">비밀번호 찾기</a>
                                             </div>
                                         </div>
                                     </div>
@@ -143,12 +164,27 @@
                                         <div class="col-md-12">
                                             <button type="submit" class="btn btn-primary btn-md btn-block waves-effect waves-light text-center m-b-20">로그인</button>
                                         </div>
+                                        
                                         <div class="col-md-12">
                                             <button type="button" class="btn btn-success waves-effect waves-light"
                                             onclick="javascipt:location.href='register1.mem'" style="width: 410px; margin-top: -15px;">회원가입</button>
                                         </div>
+                                        
+                                        <br><br>
+                                        <div class="col-md-12">
+                                        <center>
+                                        SNS 계정으로 로그인하기
+                                            <a href="${urlKakao}">
+					                   			<img src="<%= request.getContextPath() %>/resources/assets/images/login_btn_kakao_middle.png"
+					                   			 style="margin-top: 5px;">
+					                   		</a>
+					                   	</center>
+                                        </div>
+                                        
                                     </div>
-
+                                   
+                                    
+                                    
                                     <hr/>
                                     <div class="row">
                                         <div class="col-md-10">

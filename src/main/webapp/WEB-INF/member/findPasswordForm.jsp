@@ -1,9 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!-- findIdForm.jsp<br> -->
-
+<%@ include file="../common/common.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- 메일 -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(function(){
+		$("#btnSubmit").click(function(){
+			alert(1);
+			$.ajax({
+				url : "findPassword.mem",
+				type : "POST",
+				data : {
+					name : $("input[name='name']").val(),
+					email : $("input[name='email']").val()
+				},
+				success : function(result) {
+					alert(result);
+				},
+			})
+		});
+	})
+</script>
+<style type="text/css">
+.mybtn{
+  width:150px;
+  height:40px;
+  padding:0;
+  display:inline; 
+  border-radius: 4px; 
+  background: #212529;
+  color: #fff;
+  margin-top: 20px;
+  border: solid 2px #212529; 
+  transition: all 0.5s ease-in-out 0s;
+}
+.mybtn:hover .mybtn:focus {
+  background: white;
+  color: #212529;
+  text-decoration: none;
+}
+
 
 <style>
 .err {
@@ -26,6 +69,7 @@ td {
 }
 
 </style>
+
 
 <head>
     <title>Material Able bootstrap admin template by Codedthemes</title>
@@ -124,7 +168,7 @@ td {
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
 
-                        <form name="f" action="findId.mem" method="post">
+                        <form:form commandName="member" name="f" action="findPassword.mem" method="post">
                             <div class="text-center">
                                 <img src="<%= request.getContextPath() %>/resources/assets/images/logo.png" alt="logo.png">
                             </div>
@@ -132,15 +176,22 @@ td {
                                 <div class="card-block">
                                     <div class="row m-b-20">
                                         <div class="col-md-12">
-                                            <h3 class="text-center">아이디 찾기</h3>
+                                            <h3 class="text-center">비밀번호 찾기</h3>
                                         </div>
                                     </div>
                                     
                                    
                                     <table>
 										<tr>
-											<td width="30%">이름</td>
-											<td width="60%"><input type="text" name="name" value="user1"
+											
+											<td width="30%">이메일</td>
+											<td width="60%"><input type="text" name="email"
+												value="user1@gmail.com" class="form-control"
+												placeholder="이메일"></td>
+										</tr>
+										<tr>
+											<td>이름</td>
+											<td><input type="text" name="name" value="user1"
 												class="form-control" placeholder="이름"></td>
 										</tr>
 										<tr valign="top">
@@ -167,14 +218,18 @@ td {
 									
 									<div class="row m-t-30">
 									<div class="col-md-12">
-										<button type="submit" id="btnSubmit"
-											class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">아이디 찾기</button>
+										<button type="submit"
+											class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">비밀번호 찾기</button>
+										<!-- <button type="button" id="btnSubmit"
+											class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">비밀번호 찾기</button> -->
 										<button type="button" class="btn btn-default waves-effect"
 											style="width: 410px; margin-top: -15px;"
 											onclick="javascript:location.href='login.mem'">취소</button>
 									</div>
 									</div>
-                                    </form>
+                                    </form:form>
+                                    
+   
 
                                     <%-- <hr/>
                                     <div class="row">

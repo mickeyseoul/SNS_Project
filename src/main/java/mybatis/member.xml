@@ -12,6 +12,10 @@
 		 #{addr1}, #{addr2}, #{addr3}, #{business}, #{business_no})  
 	</insert>
 	
+	<insert id="RegisterMemberBySocial">
+		insert into members(no,email,name,social) values(mem_seq.nextval, #{email}, #{name}, #{social})
+	</insert>
+	
 	<select id="EmailDuplCheck" resultType="int">
 		select count(*) from members where email=#{inputemail}
 	</select>
@@ -65,6 +69,24 @@
 	<delete id="DeleteMember">
 		delete members where no=#{no} and password=#{password}
 	</delete>
+	
+	<!-- 소셜 로그인 -->
+	<select id="GetMemberByEmail" resultType="MyMember">
+		select * from members where email=#{email}
+	</select>
+	
+	<!-- 아이디 비번 찾기 -->
+	<update id="UpdatePassword">
+		update members set password=#{password} where email=#{email}
+	</update>
+	
+	<select id="FindId" resultType="MyMember">
+		select * from members where name=#{name} and hp1=#{hp1} and hp2=#{hp2} and hp3=#{hp3}
+	</select>
+	
+	<select id="FindPassword" resultType="MyMember">
+		select * from members where email=#{email} and name=#{name} and hp1=#{hp1} and hp2=#{hp2} and hp3=#{hp3}
+	</select>
 	
 
 </mapper>

@@ -27,5 +27,8 @@
 		<property name="defaultEncoding" value="UTF-8"/>
 	</bean>
 
+	<!-- 소셜 로그인 -->
+	<bean id="kakaoLoginBO" class="member.controller.KakaoLoginBO"/>
+	
 
 </beans>
